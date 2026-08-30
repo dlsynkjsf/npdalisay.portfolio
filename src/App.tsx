@@ -390,25 +390,26 @@ export default function Home() {
         ))}
       </motion.nav>
       <main className="site-shell">
+        <nav className="top-nav" aria-label="Primary navigation">
+          <a className="wordmark" href="#top" aria-label="Nikolas Dalisay, home">
+            <span className="wordmark-mark">ND</span>
+            <span>{personal.shortName}</span>
+          </a>
+
+          <div className="nav-links">
+            {navItems.map((item) => (
+              <a key={item.href} href={item.href}>
+                {item.label}
+              </a>
+            ))}
+          </div>
+
+          <a className="nav-cta" href="#contact">
+            Let&apos;s work <ArrowDownRight aria-hidden="true" />
+          </a>
+        </nav>
+
         <section className="hero-paper" id="top" aria-labelledby="hero-heading">
-          <nav className="top-nav" aria-label="Primary navigation">
-            <a className="wordmark" href="#top" aria-label="Nikolas Dalisay, home">
-              <span className="wordmark-mark">ND</span>
-              <span>{personal.shortName}</span>
-            </a>
-
-            <div className="nav-links">
-              {navItems.map((item) => (
-                <a key={item.href} href={item.href}>
-                  {item.label}
-                </a>
-              ))}
-            </div>
-
-            <a className="nav-cta" href="#contact">
-              Let&apos;s work <ArrowDownRight aria-hidden="true" />
-            </a>
-          </nav>
 
           <div className="folder-tab" aria-hidden="true">
             Portfolio file / 2026
