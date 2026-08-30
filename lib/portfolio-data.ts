@@ -1,0 +1,167 @@
+export const personal = {
+  name: 'Nikolas Josef P. Dalisay',
+  shortName: 'Nikolas Dalisay',
+  role: 'Full-Stack Developer',
+  email: 'npdalisay@gmail.com',
+  phone: '0921 652 3547',
+  location: 'Bulacan, Philippines',
+  availability: 'Available for opportunities',
+  linkedin: 'https://www.linkedin.com/in/npdalisay/',
+  github: 'https://github.com/dlsynkjsf',
+  resume: '/assets/nikolas-dalisay-resume.pdf',
+};
+
+export const aboutCopy = [
+  'I am a full-stack developer and Computer Science student at the University of Santo Tomas. I enjoy turning complex requirements into secure, useful products that feel considered from the database schema to the final interaction.',
+  'My recent work spans AI-assisted data engineering, multi-modal machine learning, and client-facing business systems. I am at my best when I can connect technical architecture, product thinking, and clear collaboration.',
+];
+
+export const skills = [
+  { short: 'TS', label: 'TypeScript', group: 'Language' },
+  { short: 'RE', label: 'React', group: 'Frontend' },
+  { short: 'NO', label: 'Node.js', group: 'Runtime' },
+  { short: 'JV', label: 'Java', group: 'Language' },
+  { short: 'SB', label: 'Spring Boot', group: 'Backend' },
+  { short: 'PY', label: 'Python', group: 'Language' },
+  { short: 'H5', label: 'HTML5', group: 'Frontend' },
+  { short: 'C3', label: 'CSS3', group: 'Frontend' },
+  { short: 'PG', label: 'PostgreSQL', group: 'Database' },
+  { short: 'MY', label: 'MySQL', group: 'Database' },
+  { short: 'SU', label: 'Supabase', group: 'Cloud' },
+  { short: 'FB', label: 'Firebase', group: 'Cloud' },
+  { short: 'AWS', label: 'AWS', group: 'Cloud' },
+  { short: 'VC', label: 'Vercel', group: 'Platform' },
+  { short: 'DK', label: 'Docker', group: 'DevOps' },
+  { short: 'GT', label: 'Git', group: 'Tooling' },
+  { short: 'PM', label: 'Postman', group: 'Tooling' },
+  { short: 'N8', label: 'n8n', group: 'Automation' },
+];
+
+export const education = [
+  {
+    period: '2023 — Present',
+    school: 'University of Santo Tomas',
+    program: 'Bachelor of Science in Computer Science',
+    detail: 'Current GWA: 1.179 · DOST Merit Scholar',
+  },
+  {
+    period: '2023',
+    school: 'Immaculate Conception Child Development Center, Inc.',
+    program: 'Science, Technology, Engineering, and Mathematics',
+    detail: 'With High Honors',
+  },
+];
+
+export const experience = [
+  {
+    period: 'May — Aug 2026',
+    role: 'Data Modeling Intern',
+    organization: 'Eskwelabs',
+    detail:
+      'Architected an AI-driven course proposal with n8n and Google Workspace, translating iterative research into a production-ready data engineering framework.',
+  },
+  {
+    period: 'Aug 2026 — Present',
+    role: 'Auditor',
+    organization: 'Computer Science Society · UST',
+    detail:
+      'Audits financial records, event budgets, and expenditure reports to maintain transparency and compliance with university guidelines.',
+  },
+  {
+    period: 'Aug 2025 — May 2026',
+    role: '3rd-Year Level Representative',
+    organization: 'Computer Science Society · UST',
+    detail:
+      'Represented student concerns and led departmental initiatives including CodeSprint, the CS Research Colloquium, and OlympiCSS.',
+  },
+  {
+    period: 'Sep 2024 — May 2025',
+    role: 'Executive Associate',
+    organization: 'Computer Science Society · UST',
+    detail:
+      'Supported student advocacy and coordinated planning, logistics, and delivery for batch-wide academic events.',
+  },
+];
+
+export type Project = {
+  number: string;
+  title: string;
+  subtitle: string;
+  period: string;
+  summary: string;
+  stack: string[];
+  challenge: string;
+  role: string;
+  approach: string;
+  outcome: string;
+  status: 'Private';
+  image?: string;
+  placeholder?: boolean;
+};
+
+export const projects: Project[] = [
+  {
+    number: '01',
+    title: 'SeePAT',
+    subtitle: 'Multi-modal synthetic media forensics',
+    period: 'Jan 2026 — Present',
+    summary:
+      'A thesis-led forensic framework that studies biological speech constraints and micro-temporal sync gaps to support synthetic media analysis.',
+    stack: ['Python', 'Machine Learning', 'Signal Analysis'],
+    challenge:
+      'Synthetic media detection needs signals that remain useful as generation models improve. The project investigates biological timing constraints as a harder-to-fake forensic clue.',
+    role: 'Project leader responsible for research direction, system framing, coordination, and end-to-end development.',
+    approach:
+      'Combine audio-visual feature extraction with multi-modal analysis, then evaluate micro-temporal inconsistencies against biologically grounded speech behavior.',
+    outcome:
+      'Research and implementation are ongoing. Replace this note with evaluation metrics, findings, and publication details when available.',
+    status: 'Private',
+  },
+  {
+    number: '02',
+    title: 'MaridOne',
+    subtitle: 'HRIS and payroll management system',
+    period: 'Aug 2025 — May 2026',
+    summary:
+      'A secure, custom HR and payroll platform created for Marid Industries with a modern React interface and a structured Spring Boot backend.',
+    stack: ['React', 'Spring Boot', 'PostgreSQL'],
+    challenge:
+      'Translate an organization’s payroll and HR processes into a maintainable system while preserving accuracy, security, and alignment with client expectations.',
+    role: 'Project leader overseeing technical delivery, client communication, and the complete software development lifecycle.',
+    approach:
+      'Model business rules in a Java service layer, use PostgreSQL for durable records, and build task-focused React interfaces for day-to-day operations.',
+    outcome:
+      'Delivered through final defense with a secure backend, modern frontend, and consistent client alignment throughout development.',
+    status: 'Private',
+  },
+  {
+    number: '03',
+    title: 'Project 03',
+    subtitle: 'Your next selected case study',
+    period: 'Add project dates',
+    summary:
+      'Replace this card with a project that demonstrates another side of your full-stack practice, such as product design, cloud architecture, or automation.',
+    stack: ['Add stack', 'Add stack', 'Add stack'],
+    challenge: 'Describe the user or business problem this project needed to solve.',
+    role: 'Describe your role, collaborators, responsibilities, and project constraints.',
+    approach: 'Explain the key design and engineering decisions that shaped the solution.',
+    outcome: 'Add a measurable result, learning, client outcome, or current status.',
+    status: 'Private',
+    placeholder: true,
+  },
+  {
+    number: '04',
+    title: 'Project 04',
+    subtitle: 'Your next selected case study',
+    period: 'Add project dates',
+    summary:
+      'Use this slot for a project with strong screenshots and a concise story: problem, process, technical decisions, and an outcome people can understand quickly.',
+    stack: ['Add stack', 'Add stack', 'Add stack'],
+    challenge: 'Describe the user or business problem this project needed to solve.',
+    role: 'Describe your role, collaborators, responsibilities, and project constraints.',
+    approach: 'Explain the key design and engineering decisions that shaped the solution.',
+    outcome: 'Add a measurable result, learning, client outcome, or current status.',
+    status: 'Private',
+    placeholder: true,
+  },
+];
