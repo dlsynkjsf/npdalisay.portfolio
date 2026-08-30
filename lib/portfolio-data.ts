@@ -5,36 +5,35 @@ export const personal = {
   email: 'npdalisay@gmail.com',
   phone: '0921 652 3547',
   location: 'Bulacan, Philippines',
-  availability: 'Available for opportunities',
+  availability: 'Available for opportunities!',
   linkedin: 'https://www.linkedin.com/in/npdalisay/',
   github: 'https://github.com/dlsynkjsf',
   resume: '/assets/nikolas-dalisay-resume.pdf',
 };
 
 export const aboutCopy = [
-  'I am a full-stack developer and Computer Science student at the University of Santo Tomas. I enjoy turning complex requirements into secure, useful products that feel considered from the database schema to the final interaction.',
-  'My recent work spans AI-assisted data engineering, multi-modal machine learning, and client-facing business systems. I am at my best when I can connect technical architecture, product thinking, and clear collaboration.',
+  'I focus on translating complex requirements into seamless digital experiences, ensuring every detail is thoughtfully designed — from the underlying database schema to the final user interaction.',
+  'My recent work spans AI-assisted data engineering, multi-modal machine learning, discord bots, and client-facing business systems. I am at my best when I can connect technical architecture, product thinking, and clear collaboration.',
+  'Outside of work and classes, you will see me dive into open-world games like Wuthering Waves, catching up on the latest contents from Stray Kids and RIIZE, or just doomscrolling through Tiktok and Reddit...',
 ];
 
-export const skills = [
-  { short: 'TS', label: 'TypeScript', group: 'Language' },
-  { short: 'RE', label: 'React', group: 'Frontend' },
-  { short: 'NO', label: 'Node.js', group: 'Runtime' },
-  { short: 'JV', label: 'Java', group: 'Language' },
-  { short: 'SB', label: 'Spring Boot', group: 'Backend' },
-  { short: 'PY', label: 'Python', group: 'Language' },
-  { short: 'H5', label: 'HTML5', group: 'Frontend' },
-  { short: 'C3', label: 'CSS3', group: 'Frontend' },
-  { short: 'PG', label: 'PostgreSQL', group: 'Database' },
-  { short: 'MY', label: 'MySQL', group: 'Database' },
-  { short: 'SU', label: 'Supabase', group: 'Cloud' },
-  { short: 'FB', label: 'Firebase', group: 'Cloud' },
-  { short: 'AWS', label: 'AWS', group: 'Cloud' },
-  { short: 'VC', label: 'Vercel', group: 'Platform' },
-  { short: 'DK', label: 'Docker', group: 'DevOps' },
-  { short: 'GT', label: 'Git', group: 'Tooling' },
-  { short: 'PM', label: 'Postman', group: 'Tooling' },
-  { short: 'N8', label: 'n8n', group: 'Automation' },
+export const skillGroups = [
+  {
+    label: 'Languages',
+    skills: ['Python', 'Java', 'JavaScript', 'TypeScript', 'PHP', 'Dart', 'HTML', 'CSS'],
+  },
+  {
+    label: 'Frameworks & Runtime',
+    skills: ['React', 'Node.js', 'Spring Boot', 'Flutter'],
+  },
+  {
+    label: 'Cloud, Data & DevOps',
+    skills: ['AWS', 'Firebase', 'Supabase', 'Vercel', 'PostgreSQL', 'MySQL', 'Docker', 'Git'],
+  },
+  {
+    label: 'Tools, Design & Productivity',
+    skills: ['Postman', 'n8n', 'Figma', 'Canva', 'Adobe Premiere Pro', 'Google Workspace', 'Microsoft Office'],
+  },
 ];
 
 export const education = [

@@ -21,7 +21,7 @@ import {
   Sparkles,
   SquareUserRound,
 } from 'lucide-react';
-import { MotionConfig, motion, useScroll, useSpring } from 'motion/react';
+import { AnimatePresence, MotionConfig, motion, useScroll, useSpring } from 'motion/react';
 import {
   Dialog,
   DialogContent,
@@ -39,7 +39,7 @@ import {
   personal,
   type Project,
   projects,
-  skills,
+  skillGroups,
 } from '@/lib/portfolio-data';
 
 declare global {
@@ -79,6 +79,23 @@ const dockNavItems = [
 
 const TURNSTILE_TEST_SITE_KEY = '1x00000000000000000000AA';
 
+const aboutEmphasis = new Set([
+  'seamless digital experiences',
+  'AI-assisted data engineering',
+  'client-facing business systems',
+  'Wuthering Waves',
+  'Stray Kids and RIIZE',
+]);
+
+const aboutEmphasisPattern =
+  /(seamless digital experiences|AI-assisted data engineering|client-facing business systems|Wuthering Waves|Stray Kids and RIIZE)/g;
+
+function emphasizeAboutCopy(paragraph: string) {
+  return paragraph.split(aboutEmphasisPattern).map((part, index) =>
+    aboutEmphasis.has(part) ? <strong key={`${part}-${index}`}>{part}</strong> : part,
+  );
+}
+
 function Reveal({
   children,
   className,
@@ -106,15 +123,15 @@ function SectionHeading({
   title,
   note,
 }: {
-  index: string;
+  index?: string;
   title: string;
-  note: string;
+  note?: string;
 }) {
   return (
-    <Reveal className="section-heading">
-      <span className="section-index">{index}</span>
+    <Reveal className={`section-heading${!index && !note ? ' section-heading-plain' : ''}`}>
+      {index && <span className="section-index">{index}</span>}
       <div>
-        <p>{note}</p>
+        {note && <p>{note}</p>}
         <h2>{title}</h2>
       </div>
       <motion.span
@@ -369,8 +386,23 @@ function ContactForm() {
 }
 
 export default function Home() {
+  const heroNavRef = useRef<HTMLElement>(null);
+  const [showPersistentNav, setShowPersistentNav] = useState(false);
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.25 });
+
+  useEffect(() => {
+    const heroNav = heroNavRef.current;
+    if (!heroNav) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowPersistentNav(!entry.isIntersecting),
+      { threshold: 0 },
+    );
+
+    observer.observe(heroNav);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <MotionConfig reducedMotion="user">
@@ -389,27 +421,65 @@ export default function Home() {
           </a>
         ))}
       </motion.nav>
+      <AnimatePresence>
+        {showPersistentNav && (
+          <motion.nav
+            className="persistent-nav"
+            aria-label="Persistent primary navigation"
+            initial={{ opacity: 0, y: -20, scale: 0.985 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -16, scale: 0.985 }}
+            transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <a className="wordmark" href="#top" aria-label="Nikolas Dalisay, home">
+              <img
+                className="wordmark-mark"
+                src="/assets/ace-card-logo.png?v=20260831"
+                alt=""
+                width="1222"
+                height="1287"
+              />
+            </a>
+
+            <div className="nav-links">
+              {navItems.map((item) => (
+                <a key={item.href} href={item.href}>
+                  {item.label}
+                </a>
+              ))}
+            </div>
+
+            <a className="nav-cta" href="#contact">
+              Let&apos;s work <ArrowDownRight aria-hidden="true" />
+            </a>
+          </motion.nav>
+        )}
+      </AnimatePresence>
       <main className="site-shell">
-        <nav className="top-nav" aria-label="Primary navigation">
-          <a className="wordmark" href="#top" aria-label="Nikolas Dalisay, home">
-            <span className="wordmark-mark">ND</span>
-            <span>{personal.shortName}</span>
-          </a>
-
-          <div className="nav-links">
-            {navItems.map((item) => (
-              <a key={item.href} href={item.href}>
-                {item.label}
-              </a>
-            ))}
-          </div>
-
-          <a className="nav-cta" href="#contact">
-            Let&apos;s work <ArrowDownRight aria-hidden="true" />
-          </a>
-        </nav>
-
         <section className="hero-paper" id="top" aria-labelledby="hero-heading">
+          <nav ref={heroNavRef} className="top-nav" aria-label="Primary navigation">
+            <a className="wordmark" href="#top" aria-label="Nikolas Dalisay, home">
+              <img
+                className="wordmark-mark"
+                src="/assets/ace-card-logo.png?v=20260831"
+                alt=""
+                width="1222"
+                height="1287"
+              />
+            </a>
+
+            <div className="nav-links">
+              {navItems.map((item) => (
+                <a key={item.href} href={item.href}>
+                  {item.label}
+                </a>
+              ))}
+            </div>
+
+            <a className="nav-cta" href="#contact">
+              Let&apos;s work <ArrowDownRight aria-hidden="true" />
+            </a>
+          </nav>
 
           <div className="folder-tab" aria-hidden="true">
             Portfolio file / 2026
@@ -433,10 +503,6 @@ export default function Home() {
                 whileHover={{ rotate: -0.7, y: -5 }}
                 transition={{ type: 'spring', stiffness: 240, damping: 18 }}
               >
-                <div className="id-card-topline">
-                  <span>UST · CS</span>
-                  <span>ID 07</span>
-                </div>
                 <div className="portrait-window">
                   <img
                     src="/assets/nikolas-portrait.webp"
@@ -447,22 +513,10 @@ export default function Home() {
                   />
                 </div>
                 <div className="id-card-footer">
-                  <p>Hello, I&apos;m Nikolas.</p>
-                  <span>{personal.role}</span>
+                  <p>Wow ambait?!</p>
                 </div>
                 <span className="fastener fastener-left" aria-hidden="true" />
                 <span className="fastener fastener-right" aria-hidden="true" />
-              </motion.div>
-
-              <motion.div
-                className="date-ticket"
-                aria-hidden="true"
-                initial={{ opacity: 0, scale: 0.8, rotate: -12 }}
-                animate={{ opacity: 1, scale: 1, rotate: -6 }}
-                transition={{ delay: 0.42, type: 'spring', stiffness: 250, damping: 18 }}
-              >
-                <span>FIELD NOTE</span>
-                <strong>31.08.2026</strong>
               </motion.div>
             </motion.div>
 
@@ -472,59 +526,43 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="eyebrow-row">
-                <span className="eyebrow">Hello there / dossier no. 07</span>
-                <span className="status-chip">{personal.availability}</span>
-              </div>
-
               <h1 id="hero-heading">
                 Nikolas Josef
                 <span>P. Dalisay</span>
               </h1>
 
               <p className="hero-lede">
-                I&apos;m a full-stack developer and Computer Science student building
+                I&apos;m a <strong>full-stack developer</strong> and Computer Science student building
                 secure, human-centered products from interface to infrastructure.
               </p>
-
-              <div className="hero-meta">
-                <span>
-                  <MapPin aria-hidden="true" /> {personal.location}
-                </span>
-                <span>UTC +08:00</span>
-              </div>
 
               <div className="hero-actions">
                 <a className="button button-primary" href="#projects">
                   Explore projects <ArrowDownRight aria-hidden="true" />
                 </a>
                 <a className="button button-secondary" href={personal.resume} download>
-                  Download résumé <Download aria-hidden="true" />
+                  Resume <Download aria-hidden="true" />
                 </a>
-              </div>
-
-              <div className="hero-note">
-                <span>Currently exploring</span>
-                <p>Applied AI · secure systems · product engineering</p>
               </div>
             </motion.div>
           </div>
 
           <a className="scroll-cue" href="#about">
-            Scroll to open the file <ArrowDownRight aria-hidden="true" />
+            Scroll for more! <ArrowDownRight aria-hidden="true" />
           </a>
         </section>
 
         <section className="paper-section profile-section" id="about" aria-labelledby="about-title">
-          <SectionHeading index="01" title="About the developer" note="Profile / working notes" />
+          <SectionHeading title="About me!" />
 
           <div className="profile-grid">
             <Reveal className="about-copy">
-              <p className="about-dropcap">{aboutCopy[0]}</p>
-              <p>{aboutCopy[1]}</p>
+              {aboutCopy.map((paragraph) => (
+                <p key={paragraph}>{emphasizeAboutCopy(paragraph)}</p>
+              ))}
               <blockquote>
                 <Sparkles aria-hidden="true" />
-                <span>Build the system. Understand the people using it.</span>
+                <span>Define, align, streamline, refine.</span>
               </blockquote>
             </Reveal>
 
@@ -554,19 +592,23 @@ export default function Home() {
           <div className="skills-education-grid">
             <div id="skills">
               <Reveal className="subsection-heading">
-                <span>Toolkit index</span>
                 <h3>Skills &amp; tools</h3>
               </Reveal>
-              <div className="skills-grid">
-                {skills.map((skill, index) => (
-                  <Reveal key={skill.label} delay={Math.min(index * 0.025, 0.3)}>
-                    <motion.div className="skill-tile" whileHover={{ y: -4, rotate: index % 2 ? 0.6 : -0.6 }}>
-                      <span>{skill.short}</span>
-                      <div>
-                        <strong>{skill.label}</strong>
-                        <small>{skill.group}</small>
-                      </div>
-                    </motion.div>
+              <div className="skill-groups">
+                {skillGroups.map((group, index) => (
+                  <Reveal className="skill-group-wrap" key={group.label} delay={index * 0.06}>
+                    <motion.article
+                      className="skill-group"
+                      whileHover={{ y: -4, rotate: index % 2 ? 0.25 : -0.25 }}
+                    >
+                      <header>
+                        <span>{String(index + 1).padStart(2, '0')}</span>
+                        <h4>{group.label}</h4>
+                      </header>
+                      <ul>
+                        {group.skills.map((skill) => <li key={skill}>{skill}</li>)}
+                      </ul>
+                    </motion.article>
                   </Reveal>
                 ))}
               </div>
@@ -574,7 +616,6 @@ export default function Home() {
 
             <div className="education-panel">
               <Reveal className="subsection-heading">
-                <span>Formal record</span>
                 <h3>Education</h3>
               </Reveal>
               <div className="education-timeline">
@@ -669,7 +710,7 @@ export default function Home() {
                   <Code2 aria-hidden="true" /> GitHub <ArrowUpRight aria-hidden="true" />
                 </a>
                 <a href={personal.resume} download>
-                  <Download aria-hidden="true" /> Résumé
+                  <Download aria-hidden="true" /> Resume
                 </a>
               </div>
 
