@@ -94,6 +94,8 @@ export type Project = {
   outcome: string;
   status: 'Private';
   image?: string;
+  repositoryUrl?: string;
+  websiteUrl?: string;
   placeholder?: boolean;
 };
 
@@ -114,6 +116,7 @@ export const projects: Project[] = [
       'Research and implementation are ongoing. Replace this note with evaluation metrics, findings, and publication details when available.',
     status: 'Private',
     image: '/assets/projects/seepat-cover.png',
+    repositoryUrl: 'https://github.com/dlsynkjsf/SeePAT',
   },
   {
     number: '02',
@@ -131,6 +134,7 @@ export const projects: Project[] = [
       'Delivered through final defense with a secure backend, modern frontend, and consistent client alignment throughout development.',
     status: 'Private',
     image: '/assets/projects/maridone-cover.png',
+    websiteUrl: 'https://marid.global/',
   },
   {
     number: '03',
@@ -148,6 +152,8 @@ export const projects: Project[] = [
       'Successfully delivered a unified data system with a highly scalable, containerized architecture that ensures consistent deployment.',
     status: 'Private',
     image: '/assets/projects/shopzada-cover.png',
+    repositoryUrl: 'https://github.com/dlsynkjsf/dwh_finalproject_3csd_group_octobots',
+    websiteUrl: 'https://app.powerbi.com/links/XN4sIE0wZC?ctid=2840082d-702c-4fb1-9885-abddd1ddaa1e&pbi_source=linkShare',
   },
   {
     number: '04',
@@ -165,5 +171,7 @@ export const projects: Project[] = [
       'Prototyped and delivered a highly responsive, centralized platform during the hackathon, providing a valuable tool for pet owners.',
     status: 'Private',
     image: '/assets/projects/boneappetite-cover.png',
+    repositoryUrl: 'https://github.com/crstntaro/SajaBoysRepo',
+    websiteUrl: 'https://crstntaro.github.io/SajaBoysRepo/',
   }
 ];

@@ -962,6 +962,18 @@ a {
 }
 
 @media (min-width: 981px) {
+  .portrait-stage {
+    --lanyard-length: max(13rem, calc(50svh - 19rem));
+  }
+
+  .lanyard {
+    top: calc(4rem - var(--lanyard-length));
+  }
+
+  .lanyard span {
+    height: var(--lanyard-length);
+  }
+
   .experience-panel {
     position: sticky;
     top: var(--desktop-nav-clearance);
@@ -1232,6 +1244,32 @@ a {
   background: var(--oxide-dark);
 }
 
+.case-dialog [data-slot='dialog-close'] {
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.case-dialog [data-slot='dialog-close'] svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.case-dialog [data-slot='dialog-close']:hover {
+  background: transparent;
+  color: var(--oxide-dark);
+}
+
+.case-dialog [data-slot='dialog-close']:focus-visible {
+  border: 0;
+  outline: 2px solid var(--oxide-dark);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
 .case-dialog-header {
   gap: 0;
   padding: clamp(1.5rem, 4vw, 3rem);
@@ -1304,6 +1342,47 @@ a {
   justify-content: space-between;
   gap: 1rem;
   padding: 1.2rem 1.5rem;
+}
+
+.case-dialog-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.case-dialog-footer > .project-stack {
+  flex: 0 0 auto;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.case-dialog-links a {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.case-dialog-links a:hover,
+.case-dialog-links a:focus-visible {
+  background: var(--ink);
+  color: var(--paper-raised);
+  transform: translate(-2px, -2px);
+}
+
+.case-dialog-links a svg {
+  width: 0.85rem;
+  height: 0.85rem;
 }
 
 .contact-section {
@@ -1931,8 +2010,23 @@ a {
   }
 
   .case-dialog-footer {
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .case-dialog-links {
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+  }
+
+  .case-dialog-links a {
+    flex: 0 0 auto;
+  }
+
+  .case-dialog-footer > .project-stack {
+    flex: 1 1 0;
+    min-width: 0;
+    flex-wrap: wrap;
   }
 
   .form-row {

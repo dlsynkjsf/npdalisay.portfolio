@@ -14,6 +14,7 @@ import {
   Code2,
   Download,
   FolderKanban,
+  Globe2,
   Home as HomeIcon,
   LoaderCircle,
   LockKeyhole,
@@ -38,6 +39,7 @@ import {
   SiFirebase,
   SiFlutter,
   SiGit,
+  SiGithub,
   SiGoogle,
   SiHtml5,
   SiJavascript,
@@ -291,8 +293,18 @@ function SectionHeading({
 }
 
 function ProjectCard({ project, featured = false }: { project: Project; featured?: boolean }) {
+  const dialogRef = useRef<HTMLDivElement>(null);
+
+  const resetDialogScroll = (open: boolean) => {
+    if (!open) return;
+
+    requestAnimationFrame(() => {
+      dialogRef.current?.scrollTo({ top: 0, left: 0 });
+    });
+  };
+
   return (
-    <Dialog>
+    <Dialog onOpenChange={resetDialogScroll}>
       <DialogTrigger
         render={
           <motion.button
@@ -319,7 +331,11 @@ function ProjectCard({ project, featured = false }: { project: Project; featured
           <div className="project-title-row">
             <h3>{project.title}</h3>
             <span className="private-label">
-              <LockKeyhole aria-hidden="true" /> {project.status}
+              {project.repositoryUrl ? (
+                <><SiGithub aria-hidden="true" /> Public</>
+              ) : (
+                <><LockKeyhole aria-hidden="true" /> {project.status}</>
+              )}
             </span>
           </div>
           <p className="project-subtitle">{project.subtitle}</p>
@@ -335,7 +351,12 @@ function ProjectCard({ project, featured = false }: { project: Project; featured
         </div>
       </DialogTrigger>
 
-      <DialogContent className="case-dialog" showCloseButton>
+      <DialogContent
+        ref={dialogRef}
+        initialFocus={dialogRef}
+        className="case-dialog"
+        showCloseButton
+      >
         <DialogHeader className="case-dialog-header">
           <DialogTitle className="case-dialog-title">{project.title}</DialogTitle>
           <DialogDescription className="case-dialog-description">
@@ -374,9 +395,20 @@ function ProjectCard({ project, featured = false }: { project: Project; featured
         </div>
 
         <div className="case-dialog-footer">
-          <span className="private-label">
-            <LockKeyhole aria-hidden="true" /> Repository marked private
-          </span>
+          {(project.repositoryUrl || project.websiteUrl) && (
+            <div className="case-dialog-links">
+              {project.repositoryUrl && (
+                <a href={project.repositoryUrl} target="_blank" rel="noreferrer">
+                  <SiGithub aria-hidden="true" /> Repository <ArrowUpRight aria-hidden="true" />
+                </a>
+              )}
+              {project.websiteUrl && (
+                <a href={project.websiteUrl} target="_blank" rel="noreferrer">
+                  <Globe2 aria-hidden="true" /> Live site <ArrowUpRight aria-hidden="true" />
+                </a>
+              )}
+            </div>
+          )}
           <div className="project-stack">
             {project.stack.map((item) => (
               <span key={item}>{item}</span>

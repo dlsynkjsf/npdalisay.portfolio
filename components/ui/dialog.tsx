@@ -46,7 +46,7 @@ function DialogContent({
   ...props
 }: DialogPrimitive.Popup.Props & {
   showCloseButton?: boolean;
-}) {
+} & React.RefAttributes<HTMLDivElement>) {
   return (
     <DialogPortal>
       <DialogOverlay />
