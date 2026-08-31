@@ -1,4 +1,5 @@
 import {
+  type Ref,
   type ReactNode,
   type SubmitEventHandler,
   useEffect,
@@ -12,6 +13,8 @@ import {
   Check,
   Code2,
   Download,
+  FolderKanban,
+  Home as HomeIcon,
   LoaderCircle,
   LockKeyhole,
   Mail,
@@ -99,12 +102,12 @@ const navItems = [
 ];
 
 const dockNavItems = [
-  { index: '00', label: 'Home', href: '#top' },
-  { index: '01', label: 'About', href: '#about' },
-  { index: '02', label: 'Skills', href: '#skills' },
-  { index: '03', label: 'Experience', href: '#experience' },
-  { index: '04', label: 'Projects', href: '#projects' },
-  { index: '05', label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '#top', icon: HomeIcon },
+  { label: 'About', href: '#about', icon: SquareUserRound },
+  { label: 'Skills', href: '#skills', icon: Code2 },
+  { label: 'Experience', href: '#experience', icon: BriefcaseBusiness },
+  { label: 'Projects', href: '#projects', icon: FolderKanban },
+  { label: 'Contact', href: '#contact', icon: Mail },
 ];
 
 const TURNSTILE_TEST_SITE_KEY = '1x00000000000000000000AA';
@@ -174,13 +177,16 @@ function Reveal({
   children,
   className,
   delay = 0,
+  elementRef,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
+  elementRef?: Ref<HTMLDivElement>;
 }) {
   return (
     <motion.div
+      ref={elementRef}
       className={className}
       initial={{ opacity: 0, y: 28, filter: 'blur(7px)' }}
       whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -189,6 +195,71 @@ function Reveal({
     >
       {children}
     </motion.div>
+  );
+}
+
+const quickFacts = [
+  { label: 'Email', value: personal.email, href: `mailto:${personal.email}`, icon: Mail },
+  { label: 'Contact', value: personal.phone, href: 'tel:+639216523547', icon: Phone },
+  { label: 'Based in', value: personal.location, icon: MapPin },
+  { label: 'Status', value: personal.availability, icon: BriefcaseBusiness },
+];
+
+function QuickReference() {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+
+    let active = true;
+    const updateLayout = () => {
+      if (!active) return;
+
+      const shouldStack = Array.from(
+        card.querySelectorAll<HTMLElement>('[data-fact-measure]'),
+      ).some((value) => value.getClientRects().length > 1);
+
+      card.classList.toggle('is-stacked', shouldStack);
+    };
+
+    const resizeObserver = new ResizeObserver(updateLayout);
+    resizeObserver.observe(card);
+    const animationFrame = requestAnimationFrame(updateLayout);
+    void document.fonts.ready.then(updateLayout);
+
+    return () => {
+      active = false;
+      cancelAnimationFrame(animationFrame);
+      resizeObserver.disconnect();
+    };
+  }, []);
+
+  return (
+    <Reveal className="facts-card" delay={0.08} elementRef={cardRef}>
+      <div className="facts-card-label">Quick reference</div>
+      <dl className="facts-card-values">
+        {quickFacts.map((fact) => {
+          const Icon = fact.icon;
+          return (
+            <div key={fact.label}>
+              <dt><Icon aria-hidden="true" /> {fact.label}</dt>
+              <dd>{fact.href ? <a href={fact.href}>{fact.value}</a> : fact.value}</dd>
+            </div>
+          );
+        })}
+      </dl>
+      <div className="facts-card-measure" aria-hidden="true">
+        <dl>
+          {quickFacts.map((fact) => (
+            <div key={fact.label}>
+              <dt>{fact.label}</dt>
+              <dd><span data-fact-measure>{fact.value}</span></dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </Reveal>
   );
 }
 
@@ -245,13 +316,12 @@ function ProjectCard({ project, featured = false }: { project: Project; featured
           <div className="project-media-grid" aria-hidden="true" />
         </div>
         <div className="project-card-body">
-          <div className="project-card-meta">
-            <span>{project.period}</span>
+          <div className="project-title-row">
+            <h3>{project.title}</h3>
             <span className="private-label">
               <LockKeyhole aria-hidden="true" /> {project.status}
             </span>
           </div>
-          <h3>{project.title}</h3>
           <p className="project-subtitle">{project.subtitle}</p>
           <p className="project-summary">{project.summary}</p>
           <div className="project-stack">
@@ -260,38 +330,45 @@ function ProjectCard({ project, featured = false }: { project: Project; featured
             ))}
           </div>
           <span className="project-open">
-            Open case note <ArrowUpRight aria-hidden="true" />
+            View project details <ArrowUpRight aria-hidden="true" />
           </span>
         </div>
       </DialogTrigger>
 
       <DialogContent className="case-dialog" showCloseButton>
         <DialogHeader className="case-dialog-header">
-          <div className="case-dialog-kicker">
-            <span>Case note {project.number}</span>
-            <span>{project.period}</span>
-          </div>
           <DialogTitle className="case-dialog-title">{project.title}</DialogTitle>
           <DialogDescription className="case-dialog-description">
             {project.subtitle}
           </DialogDescription>
         </DialogHeader>
 
+        <div
+          className={`project-media case-dialog-media${project.placeholder ? ' is-placeholder' : ''}${project.image ? ' has-image' : ''}`}
+        >
+          {project.image ? (
+            <img src={project.image} alt={`${project.title} project preview`} loading="lazy" />
+          ) : (
+            <span>{project.placeholder ? 'IMAGE PLACEHOLDER' : 'PROJECT IMAGE SLOT'}</span>
+          )}
+          <div className="project-media-grid" aria-hidden="true" />
+        </div>
+
         <div className="case-dialog-grid">
           <div>
-            <span>01 / Challenge</span>
+            <span>Challenge</span>
             <p>{project.challenge}</p>
           </div>
           <div>
-            <span>02 / My role</span>
+            <span>My role</span>
             <p>{project.role}</p>
           </div>
           <div>
-            <span>03 / Approach</span>
+            <span>Approach</span>
             <p>{project.approach}</p>
           </div>
           <div>
-            <span>04 / Outcome</span>
+            <span>Outcome</span>
             <p>{project.outcome}</p>
           </div>
         </div>
@@ -487,12 +564,21 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
       >
-        {dockNavItems.map((item) => (
-          <a key={item.href} href={item.href} aria-label={`Go to ${item.label}`}>
-            <span aria-hidden="true">{item.index}</span>
-            <strong>{item.label}</strong>
-          </a>
-        ))}
+        {dockNavItems.map((item) => {
+          const Icon = item.icon;
+
+          return (
+            <a
+              key={item.href}
+              href={item.href}
+              aria-label={`Go to ${item.label}`}
+              title={item.label}
+            >
+              <Icon className="mobile-dock-icon" aria-hidden="true" />
+              <span className="sr-only">{item.label}</span>
+            </a>
+          );
+        })}
       </motion.nav>
       <AnimatePresence>
         {showPersistentNav && (
@@ -639,27 +725,7 @@ export default function Home() {
               </blockquote>
             </Reveal>
 
-            <Reveal className="facts-card" delay={0.08}>
-              <div className="facts-card-label">Quick reference</div>
-              <dl>
-                <div>
-                  <dt><Mail aria-hidden="true" /> Email</dt>
-                  <dd><a href={`mailto:${personal.email}`}>{personal.email}</a></dd>
-                </div>
-                <div>
-                  <dt><Phone aria-hidden="true" /> Contact</dt>
-                  <dd><a href="tel:+639216523547">{personal.phone}</a></dd>
-                </div>
-                <div>
-                  <dt><MapPin aria-hidden="true" /> Based in</dt>
-                  <dd>{personal.location}</dd>
-                </div>
-                <div>
-                  <dt><BriefcaseBusiness aria-hidden="true" /> Status</dt>
-                  <dd>{personal.availability}</dd>
-                </div>
-              </dl>
-            </Reveal>
+            <QuickReference />
           </div>
 
           <div className="skills-education-grid">
@@ -744,6 +810,7 @@ export default function Home() {
             </div>
 
             <div className="projects-panel" id="projects">
+              <p className="projects-note">Open a card for the project story.</p>
               <div className="projects-grid">
                 {projects.map((project, index) => (
                   <Reveal key={project.number} className={index === 0 ? 'project-feature-wrap' : undefined} delay={index * 0.06}>

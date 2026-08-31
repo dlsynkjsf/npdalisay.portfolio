@@ -86,7 +86,6 @@ export type Project = {
   number: string;
   title: string;
   subtitle: string;
-  period: string;
   summary: string;
   stack: string[];
   challenge: string;
@@ -103,10 +102,9 @@ export const projects: Project[] = [
     number: '01',
     title: 'SeePAT',
     subtitle: 'Multi-modal synthetic media forensics',
-    period: 'Jan 2026 — Present',
     summary:
       'A thesis-led forensic framework that studies biological speech constraints and micro-temporal sync gaps to support synthetic media analysis.',
-    stack: ['Python', 'Machine Learning', 'Signal Analysis'],
+    stack: ['Python', 'Machine Learning', 'Neural Networks', 'Computer Vision', 'NLP'],
     challenge:
       'Synthetic media detection needs signals that remain useful as generation models improve. The project investigates biological timing constraints as a harder-to-fake forensic clue.',
     role: 'Project leader responsible for research direction, system framing, coordination, and end-to-end development.',
@@ -115,12 +113,12 @@ export const projects: Project[] = [
     outcome:
       'Research and implementation are ongoing. Replace this note with evaluation metrics, findings, and publication details when available.',
     status: 'Private',
+    image: '/assets/projects/seepat-cover.png',
   },
   {
     number: '02',
     title: 'MaridOne',
     subtitle: 'HRIS and payroll management system',
-    period: 'Aug 2025 — May 2026',
     summary:
       'A secure, custom HR and payroll platform created for Marid Industries with a modern React interface and a structured Spring Boot backend.',
     stack: ['React', 'Spring Boot', 'PostgreSQL'],
@@ -132,35 +130,40 @@ export const projects: Project[] = [
     outcome:
       'Delivered through final defense with a secure backend, modern frontend, and consistent client alignment throughout development.',
     status: 'Private',
+    image: '/assets/projects/maridone-cover.png',
   },
   {
     number: '03',
-    title: 'Project 03',
-    subtitle: 'Your next selected case study',
-    period: 'Add project dates',
+    title: 'ShopZada',
+    subtitle: 'Data warehousing project',
     summary:
-      'Replace this card with a project that demonstrates another side of your full-stack practice, such as product design, cloud architecture, or automation.',
-    stack: ['Add stack', 'Add stack', 'Add stack'],
-    challenge: 'Describe the user or business problem this project needed to solve.',
-    role: 'Describe your role, collaborators, responsibilities, and project constraints.',
-    approach: 'Explain the key design and engineering decisions that shaped the solution.',
-    outcome: 'Add a measurable result, learning, client outcome, or current status.',
+      'An academic data warehousing solution designed to consolidate scattered departmental records into a unified, reliable system.',
+    stack: ['Python', 'PostgreSQL', 'Docker', 'Apache Airflow', 'Data Warehousing'],
+    challenge:
+      'Consolidating fragmented data from various departments into a single source of truth while ensuring the infrastructure remains highly scalable and easy to deploy.',
+    role: 'Project leader directing the end-to-end design, development, and team coordination.',
+    approach:
+      'Modeled the data warehouse using the Kimball dimensional methodology and architected a fully containerized environment using Docker Compose and PostgreSQL.',
+    outcome:
+      'Successfully delivered a unified data system with a highly scalable, containerized architecture that ensures consistent deployment.',
     status: 'Private',
-    placeholder: true,
+    image: '/assets/projects/shopzada-cover.png',
   },
   {
     number: '04',
-    title: 'Project 04',
-    subtitle: 'Your next selected case study',
-    period: 'Add project dates',
+    title: 'BoneAppetite',
+    subtitle: 'Dog-friendly restaurant locator',
     summary:
-      'Use this slot for a project with strong screenshots and a concise story: problem, process, technical decisions, and an outcome people can understand quickly.',
-    stack: ['Add stack', 'Add stack', 'Add stack'],
-    challenge: 'Describe the user or business problem this project needed to solve.',
-    role: 'Describe your role, collaborators, responsibilities, and project constraints.',
-    approach: 'Explain the key design and engineering decisions that shaped the solution.',
-    outcome: 'Add a measurable result, learning, client outcome, or current status.',
+      'A responsive web application built during DLSU HackerCup 2025 that helps pet owners discover dog-friendly dining options across the Philippines.',
+    stack: ['JavaScript', 'Tailwind CSS', 'Supabase'],
+    challenge:
+      'Addressing the lack of accessible, centralized information regarding pet-friendly dining options while delivering a functional prototype under strict hackathon time constraints.',
+    role: 'Frontend Developer responsible for prototyping and delivering an intuitive, user-focused web interface.',
+    approach:
+      'Leveraged JavaScript and Tailwind CSS for rapid frontend development, integrating with Supabase to manage and retrieve location and amenity data seamlessly.',
+    outcome:
+      'Prototyped and delivered a highly responsive, centralized platform during the hackathon, providing a valuable tool for pet owners.',
     status: 'Private',
-    placeholder: true,
-  },
+    image: '/assets/projects/boneappetite-cover.png',
+  }
 ];

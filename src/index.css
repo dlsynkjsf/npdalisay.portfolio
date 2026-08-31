@@ -687,6 +687,19 @@ a {
   font-weight: 650;
 }
 
+.facts-card.is-stacked > .facts-card-values > div {
+  grid-template-columns: 1fr;
+  gap: 0.35rem;
+}
+
+.facts-card-measure {
+  position: absolute;
+  inset: 0;
+  padding: 2.1rem 1.6rem 1.4rem;
+  pointer-events: none;
+  visibility: hidden;
+}
+
 .skills-education-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.28fr) minmax(340px, 0.72fr);
@@ -921,6 +934,10 @@ a {
   transform: rotate(-2deg);
 }
 
+.projects-note {
+  display: none;
+}
+
 .experience-panel {
   position: static;
 }
@@ -994,7 +1011,7 @@ a {
 }
 
 .project-card-featured {
-  grid-template-columns: minmax(260px, 0.9fr) minmax(300px, 1.1fr);
+  grid-template-columns: calc((100% - 1rem) / 2) minmax(0, 1fr);
 }
 
 .project-card:hover {
@@ -1094,15 +1111,16 @@ a {
   padding: clamp(1.4rem, 3vw, 2.4rem);
 }
 
-.project-card-meta {
+.project-title-row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 0.7rem;
-  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-  font-size: 0.58rem;
-  font-weight: 700;
-  text-transform: uppercase;
+  gap: 1rem;
+}
+
+.project-title-row .private-label {
+  flex: 0 0 auto;
+  margin-top: 0.2rem;
 }
 
 .private-label {
@@ -1122,7 +1140,8 @@ a {
 }
 
 .project-card h3 {
-  margin: 1rem 0 0;
+  min-width: 0;
+  margin: 0;
   font-family: var(--font-display), sans-serif;
   font-size: clamp(2rem, 4vw, 3.4rem);
   font-weight: 800;
@@ -1195,9 +1214,26 @@ a {
   background: var(--paper-raised);
   color: var(--ink);
   box-shadow: 14px 14px 0 var(--oxide);
+  scrollbar-color: var(--oxide-dark) transparent;
+  scrollbar-width: thin;
+}
+
+.case-dialog::-webkit-scrollbar {
+  width: 0.45rem;
+  background: transparent;
+}
+
+.case-dialog::-webkit-scrollbar-track,
+.case-dialog::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.case-dialog::-webkit-scrollbar-thumb {
+  background: var(--oxide-dark);
 }
 
 .case-dialog-header {
+  gap: 0;
   padding: clamp(1.5rem, 4vw, 3rem);
   border-bottom: 1.5px solid var(--ink);
   background:
@@ -1207,34 +1243,28 @@ a {
   background-size: 24px 24px, 24px 24px, auto;
 }
 
-.case-dialog-kicker {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-  font-size: 0.62rem;
-  font-weight: 800;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}
-
 .case-dialog-title {
-  margin-top: 1.6rem;
+  margin-top: 0;
   color: var(--ink);
   font-family: var(--font-display), sans-serif;
-  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  font-size: clamp(4rem, 8vw, 7.25rem);
   font-weight: 800;
   letter-spacing: -0.04em;
-  line-height: 0.76;
+  line-height: 0.72;
   text-transform: uppercase;
 }
 
 .case-dialog-description {
-  margin-top: 0.75rem;
+  margin-top: 0.35rem;
   color: var(--oxide-dark);
   font-family: var(--font-note), cursive;
   font-size: 1.45rem;
   font-weight: 700;
+}
+
+.case-dialog-media {
+  min-height: clamp(220px, 30vw, 320px);
+  border-bottom: 1.5px solid var(--ink);
 }
 
 .case-dialog-grid {
@@ -1558,9 +1588,8 @@ a {
   .mobile-dock a {
     display: grid;
     min-width: 0;
-    min-height: 50px;
-    place-content: center;
-    gap: 0.12rem;
+    min-height: 56px;
+    place-items: center;
     border-right: 1px solid var(--line);
     text-align: center;
     transition: background-color 160ms ease, color 160ms ease;
@@ -1576,27 +1605,22 @@ a {
     color: var(--paper-raised);
   }
 
-  .mobile-dock a > span {
+  .mobile-dock-icon {
+    width: 1.55rem;
+    height: 1.55rem;
     color: var(--oxide-dark);
-    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-    font-size: 0.5rem;
-    font-weight: 800;
-    line-height: 1;
+    stroke-width: 1.6;
+    transition: color 160ms ease, transform 160ms ease;
   }
 
-  .mobile-dock a:hover > span,
-  .mobile-dock a:focus-visible > span {
-    color: var(--oxide-soft);
+  .mobile-dock a:hover .mobile-dock-icon,
+  .mobile-dock a:focus-visible .mobile-dock-icon {
+    transform: translateY(-2px);
   }
 
-  .mobile-dock strong {
-    overflow: hidden;
-    font-size: clamp(0.5rem, 1.8vw, 0.68rem);
-    font-weight: 800;
-    line-height: 1.15;
-    text-overflow: ellipsis;
-    text-transform: uppercase;
-    white-space: nowrap;
+  .mobile-dock a:hover .mobile-dock-icon,
+  .mobile-dock a:focus-visible .mobile-dock-icon {
+    color: var(--paper-raised);
   }
 
   .hero-paper {
@@ -1644,28 +1668,20 @@ a {
     border-left: 0;
   }
 
-  .experience-timeline {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.5rem;
-  }
-
-  .experience-timeline::before,
-  .experience-pin {
+  .work-heading > p {
     display: none;
   }
 
-  .experience-item {
+  .projects-note {
     display: block;
-    padding: 1.25rem;
-    border: 1px solid var(--line);
-    background: rgba(247, 241, 227, 0.48);
-  }
-
-  .experience-item time {
-    display: block;
-    margin-bottom: 0.8rem;
-    color: var(--oxide-dark);
+    max-width: 14rem;
+    margin: 0 0 1.25rem auto;
+    color: var(--ink-muted);
+    font-family: var(--font-note), cursive;
+    font-size: 1.05rem;
+    line-height: 1.1;
+    text-align: right;
+    transform: rotate(-2deg);
   }
 
   .project-card-featured {
@@ -1676,6 +1692,46 @@ a {
     min-height: 300px;
     border-right: 0;
     border-bottom: 1.5px solid var(--ink);
+  }
+}
+
+@media (min-width: 721px) and (max-width: 980px) {
+  .folder-tab {
+    display: none;
+  }
+
+  .hero-paper {
+    min-height: auto;
+  }
+
+  .hero-grid {
+    min-height: auto;
+    padding: 2rem 0 3.25rem;
+  }
+
+  .portrait-stage {
+    padding: 1.75rem 0.75rem 1rem;
+  }
+
+  .hero-lede {
+    margin: 1.5rem 0 1rem;
+  }
+
+  .hero-actions {
+    margin-top: 1.5rem;
+  }
+
+  .facts-card > .facts-card-values > div {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .scroll-cue {
+    bottom: 0.85rem;
   }
 }
 
@@ -1706,13 +1762,13 @@ a {
 
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
     width: min(100% - 2rem, 560px);
     padding: 4rem 0 6rem;
   }
 
   .portrait-stage {
-    order: 2;
+    order: 1;
     width: min(90%, 390px);
     padding-top: 2rem;
   }
@@ -1726,7 +1782,7 @@ a {
   }
 
   .hero-copy {
-    order: 1;
+    order: 2;
     padding: 0;
   }
 
@@ -1739,12 +1795,17 @@ a {
   }
 
   .hero-actions {
-    display: grid;
-    grid-template-columns: 1fr;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.5rem;
   }
 
-  .button {
-    width: 100%;
+  .hero-actions .button {
+    width: auto;
+    min-height: 44px;
+    gap: 0.45rem;
+    padding: 0.68rem 0.75rem;
+    font-size: 0.78rem;
   }
 
   .scroll-cue {
@@ -1754,7 +1815,7 @@ a {
 
   .paper-section {
     margin-top: 0.6rem;
-    padding: 4rem 1rem;
+    padding: 4rem clamp(1.75rem, 7vw, 2.5rem);
   }
 
   .section-heading {
@@ -1762,7 +1823,8 @@ a {
     gap: 0.9rem;
   }
 
-  .section-heading h2 {
+  .section-heading h2,
+  .work-heading h2 {
     font-size: clamp(3.4rem, 17vw, 5.7rem);
   }
 
@@ -1780,7 +1842,7 @@ a {
     box-shadow: 7px 7px 0 var(--oxide);
   }
 
-  .facts-card dl > div {
+  .facts-card > .facts-card-values > div {
     grid-template-columns: 1fr;
     gap: 0.35rem;
   }
@@ -1795,32 +1857,36 @@ a {
     padding: 1.15rem 0;
   }
 
-  .education-timeline::before {
+  .education-timeline::before,
+  .experience-timeline::before {
     left: 0.35rem;
   }
 
-  .education-item {
+  .education-item,
+  .experience-item {
     grid-template-columns: 1.2rem 1fr;
     gap: 0.75rem;
   }
 
-  .education-item time {
+  .education-item time,
+  .experience-item time {
     grid-column: 2;
     margin-bottom: -0.35rem;
     color: var(--oxide-dark);
     font-size: 0.9rem;
   }
 
-  .education-item .timeline-pin {
+  .education-item .timeline-pin,
+  .experience-item .experience-pin {
     grid-column: 1;
     grid-row: 1 / span 2;
   }
 
-  .education-item > div {
+  .education-item > div,
+  .experience-item > div {
     grid-column: 2;
   }
 
-  .experience-timeline,
   .projects-grid {
     grid-template-columns: 1fr;
   }
@@ -1845,9 +1911,13 @@ a {
   }
 
   .case-dialog {
-    width: calc(100vw - 1rem);
-    max-height: calc(100svh - 1rem);
+    width: calc(100vw - 2.5rem);
+    max-height: calc(100svh - 2.5rem);
     box-shadow: 6px 6px 0 var(--oxide);
+  }
+
+  .case-dialog-title {
+    font-size: clamp(4rem, 20vw, 5.75rem);
   }
 
   .case-dialog-grid {
