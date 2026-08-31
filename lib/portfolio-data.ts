@@ -8,7 +8,7 @@ export const personal = {
   availability: 'Available for opportunities!',
   linkedin: 'https://www.linkedin.com/in/npdalisay/',
   github: 'https://github.com/dlsynkjsf',
-  resume: '/assets/nikolas-dalisay-resume.pdf',
+  resume: '/assets/Dalisay, Nikolas Josef - Resume.pdf',
 };
 
 export const aboutCopy = [
@@ -24,7 +24,7 @@ export const skillGroups = [
   },
   {
     label: 'Frameworks & Runtime',
-    skills: ['React', 'Node.js', 'Spring Boot', 'Flutter'],
+    skills: ['React', 'Node.js', 'Spring Boot', 'Flutter', 'Tailwind CSS'],
   },
   {
     label: 'Cloud, Data & DevOps',
@@ -32,7 +32,7 @@ export const skillGroups = [
   },
   {
     label: 'Tools, Design & Productivity',
-    skills: ['Postman', 'n8n', 'Figma', 'Canva', 'Adobe Premiere Pro', 'Google Workspace', 'Microsoft Office'],
+    skills: ['Postman', 'Bruno', 'n8n', 'Figma', 'Canva', 'Adobe Premiere Pro', 'Google Workspace', 'Microsoft Office'],
   },
 ];
 
@@ -40,7 +40,7 @@ export const education = [
   {
     period: '2023 — Present',
     school: 'University of Santo Tomas',
-    program: 'Bachelor of Science in Computer Science',
+    program: 'Bachelor of Science in Computer Science (Data Science Track)',
     detail: 'Current GWA: 1.179 · DOST Merit Scholar',
   },
   {
