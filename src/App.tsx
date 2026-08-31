@@ -22,6 +22,35 @@ import {
   SquareUserRound,
 } from 'lucide-react';
 import { AnimatePresence, MotionConfig, motion, useScroll, useSpring } from 'motion/react';
+import type { IconType } from 'react-icons';
+import { FaJava } from 'react-icons/fa';
+import {
+  SiAdobepremierepro,
+  SiAmazonaws,
+  SiCanva,
+  SiCss3,
+  SiDart,
+  SiDocker,
+  SiFigma,
+  SiFirebase,
+  SiFlutter,
+  SiGit,
+  SiGoogle,
+  SiHtml5,
+  SiJavascript,
+  SiMicrosoftoffice,
+  SiMysql,
+  SiNodedotjs,
+  SiPhp,
+  SiPostgresql,
+  SiPostman,
+  SiPython,
+  SiReact,
+  SiSpringboot,
+  SiSupabase,
+  SiTypescript,
+  SiVercel,
+} from 'react-icons/si';
 import {
   Dialog,
   DialogContent,
@@ -78,6 +107,42 @@ const dockNavItems = [
 ];
 
 const TURNSTILE_TEST_SITE_KEY = '1x00000000000000000000AA';
+
+const N8nIcon: IconType = (props) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+    <path d="M21.4737 5.6842c-1.1772 0-2.1663.8051-2.4468 1.8947h-2.8955c-1.235 0-2.289.893-2.492 2.111l-.1038.623a1.263 1.263 0 0 1-1.246 1.0555H11.289c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947s-2.1663.8051-2.4467 1.8947H4.973c-.2805-1.0896-1.2696-1.8947-2.4468-1.8947C1.1311 9.4737 0 10.6047 0 12s1.131 2.5263 2.5263 2.5263c1.1772 0 2.1663-.8051 2.4468-1.8947h1.4223c.2804 1.0896 1.2696 1.8947 2.4467 1.8947 1.1772 0 2.1663-.8051 2.4468-1.8947h1.0008a1.263 1.263 0 0 1 1.2459 1.0555l.1038.623c.203 1.218 1.257 2.111 2.492 2.111h.3692c.2804 1.0895 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263c-1.1772 0-2.1664.805-2.4468 1.8947h-.3692a1.263 1.263 0 0 1-1.246-1.0555l-.1037-.623A2.52 2.52 0 0 0 13.9607 12a2.52 2.52 0 0 0 .821-1.4794l.1038-.623a1.263 1.263 0 0 1 1.2459-1.0555h2.8955c.2805 1.0896 1.2696 1.8947 2.4468 1.8947 1.3952 0 2.5263-1.131 2.5263-2.5263s-1.131-2.5263-2.5263-2.5263m0 1.2632a1.263 1.263 0 0 1 1.2631 1.2631 1.263 1.263 0 0 1-1.2631 1.2632 1.263 1.263 0 0 1-1.2632-1.2632 1.263 1.263 0 0 1 1.2632-1.2631M2.5263 10.7368A1.263 1.263 0 0 1 3.7895 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 1.2632 12a1.263 1.263 0 0 1 1.2631-1.2632m6.3158 0A1.263 1.263 0 0 1 10.1053 12a1.263 1.263 0 0 1-1.2632 1.2632A1.263 1.263 0 0 1 7.579 12a1.263 1.263 0 0 1 1.2632-1.2632m10.1053 3.7895a1.263 1.263 0 0 1 1.2631 1.2632 1.263 1.263 0 0 1-1.2631 1.2631 1.263 1.263 0 0 1-1.2632-1.2631 1.263 1.263 0 0 1 1.2632-1.2632" />
+  </svg>
+);
+
+const skillIcons: Record<string, IconType> = {
+  Python: SiPython,
+  Java: FaJava,
+  JavaScript: SiJavascript,
+  TypeScript: SiTypescript,
+  PHP: SiPhp,
+  Dart: SiDart,
+  HTML: SiHtml5,
+  CSS: SiCss3,
+  React: SiReact,
+  'Node.js': SiNodedotjs,
+  'Spring Boot': SiSpringboot,
+  Flutter: SiFlutter,
+  AWS: SiAmazonaws,
+  Firebase: SiFirebase,
+  Supabase: SiSupabase,
+  Vercel: SiVercel,
+  PostgreSQL: SiPostgresql,
+  MySQL: SiMysql,
+  Docker: SiDocker,
+  Git: SiGit,
+  Postman: SiPostman,
+  n8n: N8nIcon,
+  Figma: SiFigma,
+  Canva: SiCanva,
+  'Adobe Premiere Pro': SiAdobepremierepro,
+  'Google Workspace': SiGoogle,
+  'Microsoft Office': SiMicrosoftoffice,
+};
 
 const aboutEmphasis = new Set([
   'seamless digital experiences',
@@ -597,18 +662,30 @@ export default function Home() {
               <div className="skill-groups">
                 {skillGroups.map((group, index) => (
                   <Reveal className="skill-group-wrap" key={group.label} delay={index * 0.06}>
-                    <motion.article
-                      className="skill-group"
-                      whileHover={{ y: -4, rotate: index % 2 ? 0.25 : -0.25 }}
-                    >
+                    <article className="skill-group">
                       <header>
                         <span>{String(index + 1).padStart(2, '0')}</span>
                         <h4>{group.label}</h4>
                       </header>
                       <ul>
-                        {group.skills.map((skill) => <li key={skill}>{skill}</li>)}
+                        {group.skills.map((skill, skillIndex) => {
+                          const SkillIcon = skillIcons[skill];
+
+                          return (
+                            <motion.li
+                              key={skill}
+                              data-label={skill}
+                              tabIndex={0}
+                              whileHover={{ y: -4, scale: 1.12, rotate: skillIndex % 2 ? 2 : -2 }}
+                              whileFocus={{ y: -4, scale: 1.12 }}
+                            >
+                              <SkillIcon aria-hidden="true" />
+                              <span className="sr-only">{skill}</span>
+                            </motion.li>
+                          );
+                        })}
                       </ul>
-                    </motion.article>
+                    </article>
                   </Reveal>
                 ))}
               </div>

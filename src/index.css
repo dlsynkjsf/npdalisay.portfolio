@@ -699,34 +699,25 @@ a {
 
 .skill-groups {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+  grid-template-columns: 1fr;
 }
 
 .skill-group-wrap {
-  height: 100%;
+  border-bottom: 1px solid var(--line);
 }
 
 .skill-group {
-  height: 100%;
-  min-height: 12rem;
-  padding: 1.15rem;
-  border: 1px solid var(--ink);
-  background: rgba(238, 232, 216, 0.64);
-  transition: background-color 160ms ease, box-shadow 160ms ease;
-}
-
-.skill-group:hover {
-  background: var(--paper);
-  box-shadow: 5px 5px 0 var(--blue-grey);
+  display: grid;
+  grid-template-columns: minmax(11rem, 0.65fr) 1.35fr;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem 0;
 }
 
 .skill-group header {
   display: flex;
   align-items: flex-start;
   gap: 0.7rem;
-  padding-bottom: 0.85rem;
-  border-bottom: 1px solid var(--line);
 }
 
 .skill-group header span {
@@ -750,19 +741,66 @@ a {
 .skill-group ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
-  margin: 1rem 0 0;
+  align-items: center;
+  gap: 0.85rem 1.15rem;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .skill-group li {
-  padding: 0.38rem 0.55rem;
-  border: 1px solid var(--line);
-  background: var(--paper-raised);
+  position: relative;
+  display: grid;
+  width: 2.85rem;
+  height: 2.85rem;
+  place-items: center;
+  color: var(--ink);
+  cursor: help;
+  transition: color 160ms ease;
+}
+
+.skill-group li:hover,
+.skill-group li:focus-visible {
+  color: var(--oxide-dark);
+}
+
+.skill-group li:focus-visible {
+  outline: 1px dashed var(--oxide-dark);
+  outline-offset: 0.25rem;
+}
+
+.skill-group li::after {
+  position: absolute;
+  z-index: 8;
+  bottom: calc(100% + 0.55rem);
+  left: 50%;
+  padding: 0.38rem 0.52rem;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  box-shadow: 3px 3px 0 var(--oxide);
+  color: var(--paper-raised);
+  content: attr(data-label);
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-  font-size: 0.64rem;
-  font-weight: 700;
+  font-size: 0.58rem;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 0.25rem);
+  transition: opacity 140ms ease, transform 140ms ease;
+  white-space: nowrap;
+}
+
+.skill-group li:hover::after,
+.skill-group li:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.skill-group li svg {
+  width: 2.25rem;
+  height: 2.25rem;
 }
 
 .education-panel {
@@ -1745,7 +1783,9 @@ a {
   }
 
   .skill-group {
-    min-height: 0;
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+    padding: 1.15rem 0;
   }
 
   .education-timeline::before {
