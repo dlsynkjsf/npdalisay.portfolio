@@ -721,12 +721,11 @@ export default function Home() {
         </section>
 
         <section className="paper-section work-section" aria-labelledby="work-title">
-          <SectionHeading index="02" title="Work in motion" note="Experience + selected projects" />
+          <SectionHeading title="Work in motion" />
 
           <div className="work-grid">
             <div className="experience-panel" id="experience">
               <Reveal className="subsection-heading">
-                <span>Timeline / 2024—now</span>
                 <h3>Experience</h3>
               </Reveal>
 
@@ -747,10 +746,7 @@ export default function Home() {
 
             <div className="projects-panel" id="projects">
               <Reveal className="subsection-heading project-heading">
-                <div>
-                  <span>Selected case notes</span>
-                  <h3>Projects</h3>
-                </div>
+                <h3>Projects</h3>
                 <p>Open a card for the project story.</p>
               </Reveal>
               <div className="projects-grid">

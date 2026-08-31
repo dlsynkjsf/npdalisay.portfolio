@@ -49,6 +49,7 @@
   --blue-grey: #9dadb3;
   --line: rgba(23, 24, 23, 0.26);
   --frame-gutter: clamp(0.5rem, 1.25vw, 1.5rem);
+  --desktop-nav-clearance: calc(var(--frame-gutter) + 5.5rem);
 }
 
 * {
@@ -58,6 +59,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--desktop-nav-clearance);
   background: var(--ink);
 }
 
@@ -170,7 +172,7 @@ a {
 #experience,
 #projects,
 #contact {
-  scroll-margin-top: 6.5rem;
+  scroll-margin-top: var(--desktop-nav-clearance);
 }
 
 .wordmark,
@@ -900,7 +902,7 @@ a {
 
 .experience-panel {
   position: sticky;
-  top: 2rem;
+  top: var(--desktop-nav-clearance);
 }
 
 .experience-timeline::before {
@@ -923,10 +925,31 @@ a {
 }
 
 .project-heading {
+  position: sticky;
+  z-index: 2;
+  top: var(--desktop-nav-clearance);
   display: flex;
   align-items: end;
   justify-content: space-between;
   gap: 1rem;
+  isolation: isolate;
+  margin-bottom: 0;
+  padding-bottom: 1.8rem;
+}
+
+.project-heading::before {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: calc(-1 * clamp(1.25rem, 5vw, 5.5rem));
+  bottom: 0;
+  left: 0;
+  background:
+    linear-gradient(rgba(139, 52, 47, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 52, 47, 0.03) 1px, transparent 1px),
+    var(--paper);
+  background-size: 28px 28px, 28px 28px, auto;
+  content: '';
 }
 
 .project-heading > p {
@@ -1492,6 +1515,18 @@ a {
 }
 
 @media (max-width: 980px) {
+  html {
+    scroll-padding-top: 1rem;
+  }
+
+  #about,
+  #skills,
+  #experience,
+  #projects,
+  #contact {
+    scroll-margin-top: 1rem;
+  }
+
   .site-shell {
     padding-bottom: 6.5rem;
   }
@@ -1604,6 +1639,14 @@ a {
 
   .experience-panel {
     position: static;
+  }
+
+  .project-heading {
+    position: static;
+  }
+
+  .project-heading::before {
+    content: none;
   }
 
   .experience-timeline {
