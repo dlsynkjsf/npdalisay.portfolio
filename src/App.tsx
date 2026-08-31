@@ -721,14 +721,13 @@ export default function Home() {
         </section>
 
         <section className="paper-section work-section" aria-labelledby="work-title">
-          <SectionHeading title="Work in motion" />
+          <Reveal className="work-heading">
+            <h2 id="work-title">Experience &amp; Projects</h2>
+            <p>Open a card for the project story.</p>
+          </Reveal>
 
           <div className="work-grid">
             <div className="experience-panel" id="experience">
-              <Reveal className="subsection-heading">
-                <h3>Experience</h3>
-              </Reveal>
-
               <div className="experience-timeline">
                 {experience.map((item, index) => (
                   <Reveal className="experience-item" key={`${item.organization}-${item.role}`} delay={index * 0.06}>
@@ -745,10 +744,6 @@ export default function Home() {
             </div>
 
             <div className="projects-panel" id="projects">
-              <Reveal className="subsection-heading project-heading">
-                <h3>Projects</h3>
-                <p>Open a card for the project story.</p>
-              </Reveal>
               <div className="projects-grid">
                 {projects.map((project, index) => (
                   <Reveal key={project.number} className={index === 0 ? 'project-feature-wrap' : undefined} delay={index * 0.06}>
