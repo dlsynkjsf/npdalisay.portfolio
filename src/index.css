@@ -1292,6 +1292,10 @@ a {
   text-transform: uppercase;
 }
 
+.case-dialog-title.is-long-title {
+  font-size: clamp(3.25rem, 6.5vw, 6rem);
+}
+
 .case-dialog-description {
   margin-top: 0.35rem;
   color: var(--oxide-dark);
@@ -2014,6 +2018,10 @@ a {
     font-size: clamp(4rem, 20vw, 5.75rem);
   }
 
+  .case-dialog-title.is-long-title {
+    font-size: clamp(2.5rem, 10.5vw, 4rem);
+  }
+
   .case-dialog-grid {
     grid-template-columns: 1fr;
   }
@@ -2036,6 +2044,15 @@ a {
 
   .case-dialog-links a {
     flex: 0 0 auto;
+  }
+
+  .case-dialog-links.has-multiple-links {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .case-dialog-links.has-multiple-links a {
+    justify-content: center;
   }
 
   .case-dialog-footer > .project-stack {
