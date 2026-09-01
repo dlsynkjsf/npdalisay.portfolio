@@ -3,7 +3,6 @@ export const personal = {
   shortName: 'Nikolas Dalisay',
   role: 'Full-Stack Developer',
   email: 'npdalisay@gmail.com',
-  phone: '0921 652 3547',
   location: 'Bulacan, Philippines',
   availability: 'Available for opportunities!',
   linkedin: 'https://www.linkedin.com/in/npdalisay/',
@@ -113,9 +112,9 @@ export const projects: Project[] = [
     approach:
       'Combine audio-visual feature extraction with multi-modal analysis, then evaluate micro-temporal inconsistencies against biologically grounded speech behavior.',
     outcome:
-      'Research and implementation are ongoing. Replace this note with evaluation metrics, findings, and publication details when available.',
+      'Research and implementation are ongoing. Evaluation metrics, findings, and publication details will be added as the study progresses.',
     status: 'Private',
-    image: '/assets/projects/seepat-cover.png',
+    image: '/assets/projects/seepat-cover.webp',
     repositoryUrl: 'https://github.com/dlsynkjsf/SeePAT',
   },
   {
@@ -170,7 +169,7 @@ export const projects: Project[] = [
     outcome:
       'Prototyped and delivered a highly responsive, centralized platform during the hackathon, providing a valuable tool for pet owners.',
     status: 'Private',
-    image: '/assets/projects/boneappetite-cover.png',
+    image: '/assets/projects/boneappetite-cover.webp',
     repositoryUrl: 'https://github.com/crstntaro/SajaBoysRepo',
     websiteUrl: 'https://crstntaro.github.io/SajaBoysRepo/',
   }

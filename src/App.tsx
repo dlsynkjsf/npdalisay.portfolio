@@ -20,7 +20,6 @@ import {
   LockKeyhole,
   Mail,
   MapPin,
-  Phone,
   Send,
   Sparkles,
   SquareUserRound,
@@ -202,7 +201,6 @@ function Reveal({
 
 const quickFacts = [
   { label: 'Email', value: personal.email, href: `mailto:${personal.email}`, icon: Mail },
-  { label: 'Contact', value: personal.phone, href: 'tel:+639216523547', icon: Phone },
   { label: 'Based in', value: personal.location, icon: MapPin },
   { label: 'Status', value: personal.availability, icon: BriefcaseBusiness },
 ];
@@ -625,7 +623,7 @@ export default function Home() {
             <a className="wordmark" href="#top" aria-label="Nikolas Dalisay, home">
               <img
                 className="wordmark-mark"
-                src="/assets/logo.png?v=20260831"
+                src="/assets/logo.webp?v=20260901"
                 alt=""
                 width="1222"
                 height="1287"
@@ -652,7 +650,7 @@ export default function Home() {
             <a className="wordmark" href="#top" aria-label="Nikolas Dalisay, home">
               <img
                 className="wordmark-mark"
-                src="/assets/logo.png?v=20260831"
+                src="/assets/logo.webp?v=20260901"
                 alt=""
                 width="1222"
                 height="1287"
@@ -868,11 +866,6 @@ export default function Home() {
                 <a href={`mailto:${personal.email}`}>
                   <Mail aria-hidden="true" />
                   <span><small>Email</small>{personal.email}</span>
-                  <ArrowUpRight aria-hidden="true" />
-                </a>
-                <a href="tel:+639216523547">
-                  <Phone aria-hidden="true" />
-                  <span><small>Phone</small>{personal.phone}</span>
                   <ArrowUpRight aria-hidden="true" />
                 </a>
               </div>
