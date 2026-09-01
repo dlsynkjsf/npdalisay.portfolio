@@ -1842,8 +1842,8 @@ a {
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
-    width: min(100% - 2rem, 560px);
-    padding: 4rem 0 6rem;
+    width: min(100%, 640px);
+    padding: 4rem clamp(1.75rem, 7vw, 2.5rem) 6rem;
   }
 
   .portrait-stage {
