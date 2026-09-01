@@ -1772,6 +1772,21 @@ a {
     border-right: 0;
     border-bottom: 1.5px solid var(--ink);
   }
+
+  .site-footer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
+  .site-footer span,
+  .site-footer a {
+    white-space: nowrap;
+  }
+
+  .site-footer a {
+    justify-self: end;
+  }
 }
 
 @media (min-width: 721px) and (max-width: 980px) {
@@ -2044,8 +2059,6 @@ a {
   }
 
   .site-footer {
-    align-items: flex-start;
-    flex-direction: column;
     padding: 1.5rem 1rem;
   }
 }
