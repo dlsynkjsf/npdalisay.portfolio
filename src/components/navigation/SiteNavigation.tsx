@@ -1,14 +1,14 @@
 import { type Ref } from 'react';
-import {
-  ArrowDownRight,
-  BriefcaseBusiness,
-  Code2,
-  FolderKanban,
-  Home as HomeIcon,
-  Mail,
-  SquareUserRound,
-} from 'lucide-react';
+import { ArrowDownRight } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
+import {
+  PiBracketsCurlyLight,
+  PiBriefcaseLight,
+  PiEnvelopeSimpleLight,
+  PiFolderOpenLight,
+  PiHouseSimpleLight,
+  PiIdentificationCardLight,
+} from 'react-icons/pi';
 
 const navItems = [
   { label: 'About', href: '#about' },
@@ -18,12 +18,12 @@ const navItems = [
 ];
 
 const dockNavItems = [
-  { label: 'Home', href: '#top', icon: HomeIcon },
-  { label: 'About', href: '#about', icon: SquareUserRound },
-  { label: 'Skills', href: '#skills', icon: Code2 },
-  { label: 'Experience', href: '#experience', icon: BriefcaseBusiness },
-  { label: 'Projects', href: '#projects', icon: FolderKanban },
-  { label: 'Contact', href: '#contact', icon: Mail },
+  { label: 'Home', href: '#top', icon: PiHouseSimpleLight },
+  { label: 'About', href: '#about', icon: PiIdentificationCardLight },
+  { label: 'Skills', href: '#skills', icon: PiBracketsCurlyLight },
+  { label: 'Experience', href: '#experience', icon: PiBriefcaseLight },
+  { label: 'Projects', href: '#projects', icon: PiFolderOpenLight },
+  { label: 'Contact', href: '#contact', icon: PiEnvelopeSimpleLight },
 ];
 
 function Wordmark() {

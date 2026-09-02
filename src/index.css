@@ -1689,10 +1689,9 @@ a {
   }
 
   .mobile-dock-icon {
-    width: 1.55rem;
-    height: 1.55rem;
+    width: 1.65rem;
+    height: 1.65rem;
     color: var(--oxide-dark);
-    stroke-width: 1.6;
     transition: color 160ms ease, transform 160ms ease;
   }
 
