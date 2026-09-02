@@ -1636,7 +1636,19 @@ a {
 
 @media (max-width: 980px) {
   html {
+    max-width: 100%;
+    overflow-x: hidden;
+    overscroll-behavior: none;
     scroll-padding-top: 1rem;
+    background: var(--paper);
+  }
+
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    overscroll-behavior: none;
   }
 
   #about,
