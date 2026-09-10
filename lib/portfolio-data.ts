@@ -52,6 +52,13 @@ export const education = [
 
 export const experience = [
   {
+    period: 'Sept 2026 — Present',
+    role: 'Full-Stack Developer Intern',
+    organization: 'Alphaexplora IT Services',
+    detail:
+      'Currently developing high-performance full-stack applications by integrating React UIs with Node.js REST APIs and PostgreSQL.',
+  },
+  {
     period: 'May — Aug 2026',
     role: 'Data Modeling Intern',
     organization: 'Eskwelabs',
