@@ -1340,6 +1340,15 @@ a {
   line-height: 1.55;
 }
 
+.case-dialog-access-note {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
 .case-dialog-footer {
   display: flex;
   align-items: center;

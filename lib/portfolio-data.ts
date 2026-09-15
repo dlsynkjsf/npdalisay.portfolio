@@ -98,7 +98,8 @@ export type Project = {
   role: string;
   approach: string;
   outcome: string;
-  status: 'Private';
+  status: 'Private' | 'NDA';
+  accessNote?: string;
   image?: string;
   repositoryUrl?: string;
   websiteUrl?: string;
@@ -138,9 +139,9 @@ export const projects: Project[] = [
       'Model business rules in a Java service layer, use PostgreSQL for durable records, and build task-focused React interfaces for day-to-day operations.',
     outcome:
       'Delivered through final defense with a secure backend, modern frontend, and consistent client alignment throughout development.',
-    status: 'Private',
+    status: 'NDA',
+    accessNote: 'Confidential under a non-disclosure agreement.',
     image: '/assets/projects/maridone-cover.png',
-    websiteUrl: 'https://marid.global/',
   },
   {
     number: '03',

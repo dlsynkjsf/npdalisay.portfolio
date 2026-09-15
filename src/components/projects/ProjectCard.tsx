@@ -119,6 +119,9 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
         </div>
 
         <div className="case-dialog-footer">
+          {project.accessNote && (
+            <p className="case-dialog-access-note">{project.accessNote}</p>
+          )}
           {(project.repositoryUrl || project.websiteUrl) && (
             <div
               className={`case-dialog-links${project.repositoryUrl && project.websiteUrl ? ' has-multiple-links' : ''}`}
