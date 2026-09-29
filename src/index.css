@@ -1066,15 +1066,16 @@ a {
   object-fit: cover;
 }
 
-.project-media.has-image[data-image-fit='contain'] {
-  min-height: 300px;
+.project-media.has-image[data-image-focus='title-and-tiles'] {
+  min-height: 0;
+  aspect-ratio: 4 / 3;
 }
 
-.project-media.has-image[data-image-fit='contain'] > img {
-  object-fit: contain;
+.project-media.has-image[data-image-focus='title-and-tiles'] > img {
+  object-position: center 66%;
 }
 
-.project-media.has-image[data-image-fit='contain'] .project-media-grid {
+.project-media.has-image[data-image-focus='title-and-tiles'] .project-media-grid {
   display: none;
 }
 
@@ -1322,10 +1323,6 @@ a {
 .case-dialog-media {
   min-height: clamp(220px, 30vw, 320px);
   border-bottom: 1.5px solid var(--ink);
-}
-
-.case-dialog-media.has-image[data-image-fit='contain'] {
-  min-height: 380px;
 }
 
 .case-dialog-grid {

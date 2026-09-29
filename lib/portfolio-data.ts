@@ -101,7 +101,7 @@ export type Project = {
   status: 'Private' | 'NDA';
   accessNote?: string;
   image?: string;
-  imageFit?: 'contain';
+  imageFocus?: 'title-and-tiles';
   repositoryUrl?: string;
   websiteUrl?: string;
   placeholder?: boolean;
@@ -168,7 +168,7 @@ export const projects: Project[] = [
     title: 'TermGuessr',
     subtitle: 'Wordle-inspired mobile word game',
     summary:
-      'A Wordle-inspired Flutter game built as Group 5\'s Mobile Programming final project, where players guess a five-letter word in six attempts.',
+      'A Wordle-inspired Flutter game built as our Mobile Programming final project, where players guess a five-letter word in six attempts.',
     stack: ['Flutter', 'Dart', 'Firebase'],
     challenge:
       'Recreate the core Wordle gameplay with accurate letter feedback, repeated-letter handling, and consistent game state across guesses.',
@@ -179,7 +179,7 @@ export const projects: Project[] = [
       'Delivered the complete core Wordle-style gameplay, which the team extended with Firebase accounts and persistent XP and level tracking for the final project.',
     status: 'Private',
     image: '/assets/projects/termguessr-cover.png',
-    imageFit: 'contain',
+    imageFocus: 'title-and-tiles',
     repositoryUrl: 'https://github.com/dlsynkjsf/mobprog_group5_finalproj/',
   },
   {
