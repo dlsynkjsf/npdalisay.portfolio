@@ -1026,6 +1026,10 @@ a {
   grid-template-columns: calc((100% - 1rem) / 2) minmax(0, 1fr);
 }
 
+.project-card:not(.project-card-featured) {
+  grid-template-rows: 240px 1fr;
+}
+
 .project-card:hover {
   box-shadow: 10px 10px 0 var(--oxide);
 }
@@ -1066,16 +1070,11 @@ a {
   object-fit: cover;
 }
 
-.project-media.has-image[data-image-focus='title-and-tiles'] {
-  min-height: 0;
-  aspect-ratio: 4 / 3;
+.project-media.has-image[data-image-focus='word-tiles'] > img {
+  object-position: center 72%;
 }
 
-.project-media.has-image[data-image-focus='title-and-tiles'] > img {
-  object-position: center 66%;
-}
-
-.project-media.has-image[data-image-focus='title-and-tiles'] .project-media-grid {
+.project-media.has-image[data-image-focus='word-tiles'] .project-media-grid {
   display: none;
 }
 

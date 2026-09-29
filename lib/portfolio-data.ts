@@ -101,7 +101,7 @@ export type Project = {
   status: 'Private' | 'NDA';
   accessNote?: string;
   image?: string;
-  imageFocus?: 'title-and-tiles';
+  imageFocus?: 'word-tiles';
   repositoryUrl?: string;
   websiteUrl?: string;
   placeholder?: boolean;
@@ -179,7 +179,7 @@ export const projects: Project[] = [
       'Delivered the complete core Wordle-style gameplay, which the team extended with Firebase accounts and persistent XP and level tracking for the final project.',
     status: 'Private',
     image: '/assets/projects/termguessr-cover.png',
-    imageFocus: 'title-and-tiles',
+    imageFocus: 'word-tiles',
     repositoryUrl: 'https://github.com/dlsynkjsf/mobprog_group5_finalproj/',
   },
   {
