@@ -38,6 +38,7 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
       >
         <div
           className={`project-media${project.placeholder ? ' is-placeholder' : ''}${project.image ? ' has-image' : ''}`}
+          data-image-fit={project.imageFit}
         >
           {project.image ? (
             <img src={project.image} alt={`${project.title} project preview`} loading="lazy" />
@@ -90,6 +91,7 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
 
         <div
           className={`project-media case-dialog-media${project.placeholder ? ' is-placeholder' : ''}${project.image ? ' has-image' : ''}`}
+          data-image-fit={project.imageFit}
         >
           {project.image ? (
             <img src={project.image} alt={`${project.title} project preview`} loading="lazy" />

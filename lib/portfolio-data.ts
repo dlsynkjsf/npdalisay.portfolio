@@ -101,6 +101,7 @@ export type Project = {
   status: 'Private' | 'NDA';
   accessNote?: string;
   image?: string;
+  imageFit?: 'contain';
   repositoryUrl?: string;
   websiteUrl?: string;
   placeholder?: boolean;
@@ -164,6 +165,25 @@ export const projects: Project[] = [
   },
   {
     number: '04',
+    title: 'TermGuessr',
+    subtitle: 'Wordle-inspired mobile word game',
+    summary:
+      'A Wordle-inspired Flutter game built as Group 5\'s Mobile Programming final project, where players guess a five-letter word in six attempts.',
+    stack: ['Flutter', 'Dart', 'Firebase'],
+    challenge:
+      'Recreate the core Wordle gameplay with accurate letter feedback, repeated-letter handling, and consistent game state across guesses.',
+    role: 'Backend developer responsible for all core gameplay features. Additional features, including authentication and player progression, were implemented by my backend teammate.',
+    approach:
+      'Implemented the Dart game model and controller for word selection, guess input and length validation, letter evaluation, keyboard feedback, win/loss detection, and game resets.',
+    outcome:
+      'Delivered the complete core Wordle-style gameplay, which the team extended with Firebase accounts and persistent XP and level tracking for the final project.',
+    status: 'Private',
+    image: '/assets/projects/termguessr-cover.png',
+    imageFit: 'contain',
+    repositoryUrl: 'https://github.com/dlsynkjsf/mobprog_group5_finalproj/',
+  },
+  {
+    number: '05',
     title: 'BoneAppetite',
     subtitle: 'Dog-friendly restaurant locator',
     summary:
@@ -180,5 +200,5 @@ export const projects: Project[] = [
     image: '/assets/projects/boneappetite-cover.webp',
     repositoryUrl: 'https://github.com/crstntaro/SajaBoysRepo',
     websiteUrl: 'https://crstntaro.github.io/SajaBoysRepo/',
-  }
+  },
 ];
