@@ -1288,6 +1288,7 @@ a {
 .case-dialog-header {
   gap: 0;
   padding: clamp(1.5rem, 4vw, 3rem);
+  padding-right: 4rem; 
   border-bottom: 1.5px solid var(--ink);
   background:
     linear-gradient(rgba(23, 24, 23, 0.035) 1px, transparent 1px),
