@@ -12,6 +12,31 @@ import {
 } from '@/components/ui/dialog';
 import type { Project } from '@/lib/portfolio-data';
 
+function fitDialogTitle(title: HTMLHeadingElement | null) {
+  if (!title) return;
+
+  let active = true;
+  const fit = () => {
+    if (!active || !title.clientWidth) return;
+    title.style.removeProperty('font-size');
+    title.style.whiteSpace = 'nowrap';
+    const preferredSize = Number.parseFloat(getComputedStyle(title).fontSize);
+    const scale = Math.min(1, title.clientWidth / title.scrollWidth);
+    title.style.fontSize = `${Math.max(24, preferredSize * scale)}px`;
+    title.style.whiteSpace = 'normal';
+  };
+
+  const observer = new ResizeObserver(fit);
+  observer.observe(title);
+  void document.fonts.ready.then(fit);
+  fit();
+
+  return () => {
+    active = false;
+    observer.disconnect();
+  };
+}
+
 export function ProjectCard({ project, featured = false }: { project: Project; featured?: boolean }) {
   const dialogRef = useRef<HTMLDivElement>(null);
 
@@ -80,7 +105,8 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
       >
         <DialogHeader className="case-dialog-header">
           <DialogTitle
-            className={`case-dialog-title${project.title.length > 10 ? ' is-long-title' : ''}`}
+            ref={fitDialogTitle}
+            className="case-dialog-title"
           >
             {project.title}
           </DialogTitle>
