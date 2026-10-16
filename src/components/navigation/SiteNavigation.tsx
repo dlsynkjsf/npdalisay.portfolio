@@ -1,4 +1,4 @@
-import { type Ref } from 'react';
+import { type Ref, useRef, useState } from 'react';
 import { ArrowDownRight } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import {
@@ -59,6 +59,9 @@ function NavigationLinks() {
 }
 
 export function MobileDock() {
+  const isTouchInteraction = useRef(false);
+  const [pressedHref, setPressedHref] = useState<string | null>(null);
+
   return (
     <motion.nav
       className="mobile-dock"
@@ -75,7 +78,18 @@ export function MobileDock() {
             key={item.href}
             href={item.href}
             aria-label={`Go to ${item.label}`}
-            title={item.label}
+            data-label={item.label}
+            data-pressed={pressedHref === item.href || undefined}
+            onPointerDown={(event) => {
+              isTouchInteraction.current = event.pointerType === 'touch';
+            }}
+            onTouchStart={() => setPressedHref(item.href)}
+            onTouchEnd={() => setPressedHref(null)}
+            onTouchCancel={() => setPressedHref(null)}
+            onTouchMove={() => setPressedHref(null)}
+            onContextMenu={(event) => {
+              if (isTouchInteraction.current) event.preventDefault();
+            }}
           >
             <Icon className="mobile-dock-icon" aria-hidden="true" />
             <span className="sr-only">{item.label}</span>

@@ -789,7 +789,8 @@ a {
   outline-offset: 0.25rem;
 }
 
-.skill-group li::after {
+.skill-group li::after,
+.mobile-dock a::after {
   position: absolute;
   z-index: 8;
   bottom: calc(100% + 0.55rem);
@@ -1704,12 +1705,15 @@ a {
   }
 
   .mobile-dock a {
+    position: relative;
     display: grid;
     min-width: 0;
     min-height: 56px;
     place-items: center;
     border-right: 1px solid var(--line);
     text-align: center;
+    -webkit-touch-callout: none;
+    user-select: none;
     transition: background-color 160ms ease, color 160ms ease;
   }
 
@@ -1718,9 +1722,25 @@ a {
   }
 
   .mobile-dock a:hover,
+  .mobile-dock a:active,
+  .mobile-dock a[data-pressed],
   .mobile-dock a:focus-visible {
     background: var(--ink);
     color: var(--paper-raised);
+  }
+
+  .mobile-dock a:active::after,
+  .mobile-dock a[data-pressed]::after,
+  .mobile-dock a:focus-visible::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  @media (hover: hover) {
+    .mobile-dock a:hover::after {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
   }
 
   .mobile-dock-icon {
@@ -1731,11 +1751,15 @@ a {
   }
 
   .mobile-dock a:hover .mobile-dock-icon,
+  .mobile-dock a:active .mobile-dock-icon,
+  .mobile-dock a[data-pressed] .mobile-dock-icon,
   .mobile-dock a:focus-visible .mobile-dock-icon {
     transform: translateY(-2px);
   }
 
   .mobile-dock a:hover .mobile-dock-icon,
+  .mobile-dock a:active .mobile-dock-icon,
+  .mobile-dock a[data-pressed] .mobile-dock-icon,
   .mobile-dock a:focus-visible .mobile-dock-icon {
     color: var(--paper-raised);
   }
