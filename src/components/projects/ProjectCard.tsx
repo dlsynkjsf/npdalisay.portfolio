@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { ArrowUpRight, Globe2, LockKeyhole } from 'lucide-react';
-import { motion } from 'motion/react';
 import { SiGithub } from 'react-icons/si';
 import {
   Dialog,
@@ -52,12 +51,10 @@ export function ProjectCard({ project, featured = false }: { project: Project; f
     <Dialog onOpenChange={resetDialogScroll}>
       <DialogTrigger
         render={
-          <motion.button
+          <button
             type="button"
+            aria-label={`View ${project.title} project details`}
             className={`project-card${featured ? ' project-card-featured' : ''}`}
-            whileHover={{ y: -6, rotate: featured ? -0.25 : 0.35 }}
-            whileTap={{ scale: 0.99 }}
-            transition={{ type: 'spring', stiffness: 360, damping: 25 }}
           />
         }
       >

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { MotionConfig, motion, useScroll, useSpring } from 'motion/react';
+import { MotionConfig, motion, useScroll } from 'motion/react';
 import {
   MobileDock,
   PersistentNavigation,
@@ -13,7 +13,6 @@ export default function Home() {
   const heroNavRef = useRef<HTMLElement>(null);
   const [showPersistentNav, setShowPersistentNav] = useState(false);
   const { scrollYProgress } = useScroll();
-  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.25 });
 
   useEffect(() => {
     const heroNav = heroNavRef.current;
@@ -30,7 +29,7 @@ export default function Home() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <motion.div className="reading-progress" style={{ scaleX: progress }} />
+      <motion.div className="reading-progress" aria-hidden="true" style={{ scaleX: scrollYProgress }} />
       <MobileDock />
       <PersistentNavigation visible={showPersistentNav} />
 

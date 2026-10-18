@@ -50,6 +50,10 @@
   --line: rgba(23, 24, 23, 0.26);
   --frame-gutter: clamp(0.5rem, 1.25vw, 1.5rem);
   --desktop-nav-clearance: calc(var(--frame-gutter) + 5.5rem);
+  --motion-press: 100ms;
+  --motion-snap: 180ms;
+  --motion-arrive: 480ms;
+  --ease-snap: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -222,7 +226,7 @@ a {
   background: var(--oxide);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 180ms ease;
+  transition: transform var(--motion-press) steps(3, end);
 }
 
 .nav-links a:hover::after,
@@ -231,6 +235,8 @@ a {
 }
 
 .nav-cta {
+  --control-depth: 3px;
+  --control-shadow: var(--oxide);
   justify-self: end;
   gap: 0.55rem;
   padding: 0.7rem 1rem;
@@ -238,6 +244,7 @@ a {
   color: var(--paper-raised);
   font-size: 0.82rem;
   font-weight: 700;
+  box-shadow: var(--control-depth) var(--control-depth) 0 var(--control-shadow);
 }
 
 .nav-cta svg,
@@ -314,6 +321,14 @@ a {
   background: var(--paper-raised);
   box-shadow: 14px 16px 0 var(--oxide);
   transform: rotate(-2.2deg);
+  transition: transform var(--motion-snap) var(--ease-snap), box-shadow var(--motion-snap) var(--ease-snap);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .id-card:hover {
+    transform: translate(-3px, -3px) rotate(-1deg);
+    box-shadow: 17px 19px 0 var(--oxide);
+  }
 }
 
 .id-card-footer {
@@ -397,6 +412,11 @@ a {
   text-transform: inherit;
 }
 
+.hero-copy h1 .hero-name-line {
+  color: var(--ink);
+  line-height: inherit;
+}
+
 .hero-lede {
   max-width: 42rem;
   margin: 2rem 0 1.25rem;
@@ -419,6 +439,7 @@ a {
 }
 
 .button {
+  --control-depth: 5px;
   display: inline-flex;
   min-height: 48px;
   align-items: center;
@@ -428,30 +449,19 @@ a {
   border: 1.5px solid var(--ink);
   font-size: 0.84rem;
   font-weight: 750;
-  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
-}
-
-.button:hover {
-  transform: translate(-2px, -2px);
 }
 
 .button-primary {
+  --control-shadow: var(--oxide);
   background: var(--ink);
   color: var(--paper-raised);
   box-shadow: 5px 5px 0 var(--oxide);
 }
 
-.button-primary:hover {
-  box-shadow: 8px 8px 0 var(--oxide);
-}
-
 .button-secondary {
+  --control-shadow: var(--blue-grey);
   background: rgba(247, 241, 227, 0.55);
   box-shadow: 5px 5px 0 var(--blue-grey);
-}
-
-.button-secondary:hover {
-  box-shadow: 8px 8px 0 var(--blue-grey);
 }
 
 .scroll-cue {
@@ -768,7 +778,7 @@ a {
   list-style: none;
 }
 
-.skill-group li {
+.skill-group .skill-icon {
   position: relative;
   display: grid;
   width: 2.85rem;
@@ -776,20 +786,25 @@ a {
   place-items: center;
   color: var(--ink);
   cursor: help;
-  transition: color 160ms ease;
+  border: 1px solid transparent;
+  transition: transform var(--motion-press) var(--ease-snap), box-shadow var(--motion-press) var(--ease-snap), color var(--motion-press);
 }
 
-.skill-group li:hover,
-.skill-group li:focus-visible {
+.skill-group .skill-icon:hover,
+.skill-group .skill-icon:focus-visible {
   color: var(--oxide-dark);
+  border-color: var(--ink);
+  background: var(--paper-raised);
+  box-shadow: 3px 3px 0 var(--blue-grey);
+  transform: translate(-2px, -2px);
 }
 
-.skill-group li:focus-visible {
+.skill-group .skill-icon:focus-visible {
   outline: 1px dashed var(--oxide-dark);
   outline-offset: 0.25rem;
 }
 
-.skill-group li::after,
+.skill-group .skill-icon::after,
 .mobile-dock a::after {
   position: absolute;
   z-index: 8;
@@ -809,17 +824,17 @@ a {
   opacity: 0;
   pointer-events: none;
   transform: translate(-50%, 0.25rem);
-  transition: opacity 140ms ease, transform 140ms ease;
+  transition: opacity var(--motion-press), transform var(--motion-press) var(--ease-snap);
   white-space: nowrap;
 }
 
-.skill-group li:hover::after,
-.skill-group li:focus-visible::after {
+.skill-group .skill-icon:hover::after,
+.skill-group .skill-icon:focus-visible::after {
   opacity: 1;
   transform: translate(-50%, 0);
 }
 
-.skill-group li svg {
+.skill-group .skill-icon svg {
   width: 2.25rem;
   height: 2.25rem;
 }
@@ -1011,6 +1026,8 @@ a {
 }
 
 .project-card {
+  --control-depth: 7px;
+  --control-shadow: var(--oxide);
   display: grid;
   width: 100%;
   height: 100%;
@@ -1029,10 +1046,6 @@ a {
 
 .project-card:not(.project-card-featured) {
   grid-template-rows: 240px 1fr;
-}
-
-.project-card:hover {
-  box-shadow: 10px 10px 0 var(--oxide);
 }
 
 .project-media {
@@ -1386,6 +1399,8 @@ a {
 }
 
 .case-dialog-links a {
+  --control-depth: 3px;
+  --control-shadow: var(--blue-grey);
   display: inline-flex;
   min-height: 38px;
   align-items: center;
@@ -1398,14 +1413,13 @@ a {
   font-size: 0.62rem;
   font-weight: 800;
   text-transform: uppercase;
-  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+  box-shadow: var(--control-depth) var(--control-depth) 0 var(--control-shadow);
 }
 
 .case-dialog-links a:hover,
 .case-dialog-links a:focus-visible {
   background: var(--ink);
   color: var(--paper-raised);
-  transform: translate(-2px, -2px);
 }
 
 .case-dialog-links a svg {
@@ -1478,6 +1492,8 @@ a {
 }
 
 .social-links a {
+  --control-depth: 3px;
+  --control-shadow: var(--blue-grey);
   display: flex;
   min-height: 46px;
   align-items: center;
@@ -1488,12 +1504,7 @@ a {
   font-size: 0.74rem;
   font-weight: 800;
   text-transform: uppercase;
-  transition: transform 160ms ease, box-shadow 160ms ease;
-}
-
-.social-links a:hover {
-  box-shadow: 5px 5px 0 var(--blue-grey);
-  transform: translate(-2px, -2px);
+  box-shadow: var(--control-depth) var(--control-depth) 0 var(--control-shadow);
 }
 
 .social-links svg {
@@ -1632,7 +1643,7 @@ a {
 }
 
 .spin {
-  animation: spin 0.8s linear infinite;
+  animation: spin 0.8s steps(8, end) infinite;
 }
 
 @keyframes spin {
@@ -1656,6 +1667,106 @@ a {
 .site-footer a {
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+
+/* A rigid surface lifts off its block shadow, then presses flush on activation. */
+:is(.button, .nav-cta, .project-card, .social-links a, .case-dialog-links a) {
+  transition:
+    transform var(--motion-snap) var(--ease-snap),
+    box-shadow var(--motion-snap) var(--ease-snap),
+    background-color var(--motion-press),
+    color var(--motion-press);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :is(.button, .nav-cta, .project-card, .social-links a, .case-dialog-links a):not(:disabled):hover {
+    transform: translate(-3px, -3px);
+    box-shadow: calc(var(--control-depth) + 3px) calc(var(--control-depth) + 3px) 0 var(--control-shadow);
+  }
+}
+
+:is(.button, .nav-cta, .project-card, .social-links a, .case-dialog-links a):not(:disabled):focus-visible {
+  transform: translate(-3px, -3px);
+  box-shadow: calc(var(--control-depth) + 3px) calc(var(--control-depth) + 3px) 0 var(--control-shadow);
+}
+
+:is(.button, .nav-cta, .project-card, .social-links a, .case-dialog-links a):not(:disabled):active {
+  transform: translate(var(--control-depth), var(--control-depth));
+  box-shadow: 0 0 0 var(--control-shadow);
+  transition-duration: var(--motion-press);
+}
+
+.case-dialog [data-slot='dialog-close'] {
+  transition: transform var(--motion-press) steps(2, end), color var(--motion-press);
+}
+
+.case-dialog [data-slot='dialog-close']:active {
+  transform: translate(2px, 2px);
+}
+
+/* One print-and-stamp entrance. Reading sections remain stationary. */
+@media (prefers-reduced-motion: no-preference) {
+  .portrait-stamp {
+    animation: card-stamp var(--motion-arrive) var(--ease-snap) both;
+  }
+
+  .hero-copy h1 span {
+    animation: print-line 320ms steps(5, end) 80ms both;
+  }
+
+  .hero-copy h1 span:last-child {
+    animation-delay: 200ms;
+  }
+
+  .hero-lede strong {
+    animation: ink-highlight 240ms steps(3, end) 400ms both;
+  }
+
+  .reveal-stamp[data-entered] {
+    animation: card-stamp 320ms var(--ease-snap) both;
+  }
+
+  .reveal-rule[data-entered] .heading-rule {
+    animation: rule-print 240ms steps(5, end) both;
+  }
+
+  .case-dialog[data-open] {
+    animation: panel-open 220ms var(--ease-snap) both;
+  }
+
+  .case-dialog[data-closed] {
+    animation: panel-close 100ms ease-in both;
+  }
+}
+
+@keyframes card-stamp {
+  0% { transform: translate(-10px, -14px) rotate(-1.2deg); }
+  72% { transform: translate(2px, 2px) rotate(0.2deg); }
+  100% { transform: translate(0, 0) rotate(0); }
+}
+
+@keyframes print-line {
+  from { clip-path: inset(-10% 100% -15% 0); }
+  to { clip-path: inset(-10% 0 -15% 0); }
+}
+
+@keyframes ink-highlight {
+  from { box-shadow: inset 0 0 0 rgba(213, 164, 154, 0.58); }
+  to { box-shadow: inset 0 -0.34em 0 rgba(213, 164, 154, 0.58); }
+}
+
+@keyframes rule-print {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes panel-open {
+  from { opacity: 0.7; transform: translate(-10px, -10px); }
+  to { opacity: 1; transform: translate(0, 0); }
+}
+
+@keyframes panel-close {
+  to { opacity: 0; transform: translate(6px, 6px); }
 }
 
 @media (max-width: 980px) {
@@ -1714,7 +1825,7 @@ a {
     text-align: center;
     -webkit-touch-callout: none;
     user-select: none;
-    transition: background-color 160ms ease, color 160ms ease;
+    transition: background-color var(--motion-press), color var(--motion-press);
   }
 
   .mobile-dock a:last-child {
@@ -1747,7 +1858,7 @@ a {
     width: 1.65rem;
     height: 1.65rem;
     color: var(--oxide-dark);
-    transition: color 160ms ease, transform 160ms ease;
+    transition: color var(--motion-press), transform var(--motion-press) steps(2, end);
   }
 
   .mobile-dock a:hover .mobile-dock-icon,
@@ -1755,6 +1866,11 @@ a {
   .mobile-dock a[data-pressed] .mobile-dock-icon,
   .mobile-dock a:focus-visible .mobile-dock-icon {
     transform: translateY(-2px);
+  }
+
+  .mobile-dock a:active .mobile-dock-icon,
+  .mobile-dock a[data-pressed] .mobile-dock-icon {
+    transform: translate(2px, 2px);
   }
 
   .mobile-dock a:hover .mobile-dock-icon,
@@ -2144,5 +2260,21 @@ a {
   *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .case-dialog {
+    animation: none !important;
+  }
+
+  .id-card:hover {
+    transform: rotate(-2.2deg);
+  }
+
+  :is(.button, .nav-cta, .project-card, .social-links a, .case-dialog-links a, .skill-group .skill-icon):is(:hover, :focus-visible, :active),
+  .mobile-dock a:is(:hover, :focus-visible, :active, [data-pressed]) .mobile-dock-icon {
+    transform: none;
   }
 }

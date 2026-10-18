@@ -31,7 +31,7 @@ export function WorkSection() {
           <p className="projects-note">Open a card for the project story.</p>
           <div className="projects-grid">
             {projects.map((project, index) => (
-              <Reveal key={project.number} className={index === 0 ? 'project-feature-wrap' : undefined} delay={index * 0.06}>
+              <Reveal effect="stamp" key={project.number} className={index === 0 ? 'project-feature-wrap' : undefined} delay={index * 0.06}>
                 <ProjectCard project={project} featured={index === 0} />
               </Reveal>
             ))}

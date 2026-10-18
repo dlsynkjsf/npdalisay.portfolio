@@ -66,9 +66,9 @@ export function MobileDock() {
     <motion.nav
       className="mobile-dock"
       aria-label="Section navigation"
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 1, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
     >
       {dockNavItems.map((item) => {
         const Icon = item.icon;
@@ -107,10 +107,10 @@ export function PersistentNavigation({ visible }: { visible: boolean }) {
         <motion.nav
           className="persistent-nav"
           aria-label="Persistent primary navigation"
-          initial={{ opacity: 0, y: -20, scale: 0.985 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -16, scale: 0.985 }}
-          transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0, x: -8, y: -8 }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
+          exit={{ opacity: 0, x: 4, y: -8, transition: { duration: 0.1 } }}
+          transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
         >
           <Wordmark />
           <NavigationLinks />
